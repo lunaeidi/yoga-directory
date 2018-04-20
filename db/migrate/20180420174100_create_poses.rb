@@ -5,7 +5,7 @@ class CreatePoses < ActiveRecord::Migration[5.2]
       t.string :content
       t.integer :user_id
       t.integer :level_id
-      t.varbinary :image
+    
       t.timestamps
     end
   end

@@ -10,3 +10,11 @@
 </li>
 <%end%>
 </ul>
+
+<%if current_user == @pose.user_id%> #Links to edit and delete
+
+<form method="post"action="/poses/<%=@pose.id%>/delete"> #will this one work??
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit"value="delete">
+</form>
+<%end%>

@@ -1,5 +1,14 @@
+<%if logged_in?%>
+<h1>Hi, you are logged in as <%@user.name%></h1>
+<%end%>
+
 <%@poses.all.each do |pose|%>
 <p><%=pose.image%></h1>
 <h1><%=pose.name%></h1>
 <h1><%=pose.level%></h1>
+<%end%>
+<%if logged_in?%>
+<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+  <input type=submit value='logout'>
+<% end %>
 <%end%>
