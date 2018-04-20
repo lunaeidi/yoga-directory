@@ -1,11 +1,8 @@
-<!--
-<%if logged_in?%>
-<h1>Hi, <%@user.name%></h1>
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='logout'>
-<% end %>
-<%else%> -->
+<h1>Welcome to the Yoga poses directory!</h1>
 
 <%=link_to 'Sign up', controller:'users', action:'new'%> or <%=link_to "Log in", controller:'sessions',action:'new'%>
-#are there paths for log in and sign up? check route file.
-    <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+to add to the directory.
+<br><br>
+  Click here to <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<br><br>
+<%=link_to 'View Poses', poses_path%>

@@ -11,15 +11,16 @@ class PosesController < ApplicationController
   end
   def destroy
     @pose=Pose.find(params[:id])
-    if current_user.id = @pose.user_id
+    if current_user.id == @pose.user_id
       @pose.delete
-      redirect_to poses__path
+      redirect_to poses_path
     else
       redirect_to poses_path
   end
+end
   def index
-    @user= User.find(session[:user_id])
-    @poses=Post.all
+    #@user= User.find(session[:user_id])
+    @poses=Pose.all
   end
   def show
     @pose=Pose.find(params[:id])

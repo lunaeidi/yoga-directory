@@ -12,10 +12,10 @@ class SessionsController < ApplicationController
 render 'users/home' #is this interchangeable with redirect_to controller:'....' or can do redirect_to root_path
 
   else #login normal way
-     user = User.find_by(:username => params[:user][:username])
-     if user && user.authenticate(params[:user][:password])
+     user = User.find_by(:username => params[:username])
+     if user && user.authenticate(params[:password])
        session[:user_id]= user.id
-       return redirect_to
+       return redirect_to poses_path
      else
        flash[:message]= "Invalid username or password" #does this work? u need the middleware use flash? or just :alert?
        redirect_to controller: 'sessions', action: 'new'
