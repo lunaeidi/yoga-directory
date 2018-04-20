@@ -1,0 +1,12 @@
+<img src="">
+<h1><%=@pose.name%></h1>
+<h3><%=@pose.description%></h3>
+
+
+<ul>
+<%=@pose.reviews.each do |review|%>
+<li>
+<%=review.user%>-<%=review.content%>
+</li>
+<%end%>
+</ul>
