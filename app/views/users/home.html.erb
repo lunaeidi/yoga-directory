@@ -1,0 +1,13 @@
+
+<%if logged_in?%>
+<h1>Hi, <%@user.name%></h1>
+<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+  <input type=submit value='logout'>
+<% end %>
+<%else%>
+#if not logged in... link to sign up or log in, or log in via facebook
+<%=link_to 'Sign up', controller:'users', action:'new'%> or <%=link_to "Log in", controller:'sessions',action:'new'%>
+#are there paths for log in and sign up? check route file.
+    <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+
+<%end%>

@@ -15,4 +15,8 @@ session[:user_id] = @user.id
 redirect_to
   end
 end
-end 
+def home
+    @user= User.find(session[:user_id])
+
+end
+end
