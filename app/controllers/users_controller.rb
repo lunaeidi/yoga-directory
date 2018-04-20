@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if user=User.find_by_name(params[:name])
       flash[:message] = "Username already exists" #does this work alone?
       return redirect_to controller:'users', action:'new'
-    elsif params[:user][:username].empty? #or make this validation in the model, and put the message there and do if user.save
+    elsif params[:user][:username].empty? #have validation in model... and put the message there and do if user.save
     flash[:message]= "You must include a username"
     return  redirect_to controller:'users', action:'create'
   else
@@ -16,7 +16,10 @@ redirect_to
   end
 end
 def home
-    @user= User.find(session[:user_id])
+  if !logged_in?
+    
+  else
+      @user= User.find(session[:user_id])
 
 end
 end
