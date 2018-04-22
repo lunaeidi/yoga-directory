@@ -24,6 +24,6 @@ render 'users/home' #is this interchangeable with redirect_to controller:'....' 
   end
   def destroy
     session.clear
-    redirect_to
-  end
+    redirect_to controller:'users',action:'home'
+    end
 end

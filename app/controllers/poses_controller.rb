@@ -1,5 +1,6 @@
 class PosesController < ApplicationController
   def new
+    @pose= Pose.new
   end
   def create
   end

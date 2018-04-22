@@ -6,7 +6,7 @@
 <ul>
 <%=@pose.reviews.each do |review|%>
 <li>
-<%=review.user%>-<%=review.content%>
+<%=review.user.username%>-<%=review.content%>
 </li>
 <%end%>
 </ul>
