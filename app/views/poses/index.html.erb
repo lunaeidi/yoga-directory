@@ -2,6 +2,26 @@
 <h1>Hi, you are logged in as <%current_user%></h1>
 <%end%>
 
+<!-- <% if !params[:author].blank? %>
+  <% @posts = Post.where(author: params[:author]) %>
+<% elsif !params[:date].blank? %>
+  <% if params[:date] == "Today" %>
+    <% @posts = Post.where("created_at >=?", Time.zone.today.beginning_of_day) %>
+  <% else %>
+    <% @posts = Post.where("created_at <?", Time.zone.today.beginning_of_day) %>
+  <% end %>
+<% end %> -->
+
+<div>
+  <h3>Filter poses:</h3>
+  <%= form_tag("/poses", method: "get") do %>
+    <%= select_tag "category", options_from_collection_for_select(@categories, "id", "name"), include_blank: true %>
+    <%= select_tag "level", options_from_collection_for_select(@levels, "id", "level"), include_blank: true %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+#how to filter by both things at once?
+
 <%@poses.all.each do |pose|%>
 <p><%=pose.image%></h1>
 <h1><%=pose.name%></h1>
