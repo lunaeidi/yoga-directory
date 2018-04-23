@@ -27,3 +27,7 @@ end
     @pose=Pose.find(params[:id])
   end
 end
+private
+def post_params
+  params.require(:post).permit(:name,:content,:image, category_ids:[])
+end

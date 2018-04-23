@@ -6,7 +6,8 @@
 <ul>
 <%=@pose.reviews.each do |review|%>
 <li>
-<%=review.user.username%>-<%=review.content%>
+<%=link_to review.user.username, user_path(review.user)%> says <%=review.content%>
+#not sure if have user path
 </li>
 <%end%>
 </ul>
