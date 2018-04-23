@@ -29,10 +29,10 @@ end
     @levels= Level.all
 
     if !params[:level].blank?
-    @poses = Post.where(level: params[:level])
+    @poses =  Post.by_level(params[:level])#Post.where(level: params[:level])
     #then check category
   elsif !params[:category].blank?
-    @poses= Post.where(category: params[:category]) #or might need to do .include? since its many categories
+    @poses= Post.by_category(params[:category]) #Post.where(category: params[:category]) #or might need to do .include? since its many categories
     end
   else
     # if no filters are applied, show all poses
