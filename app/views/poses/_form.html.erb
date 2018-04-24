@@ -1,6 +1,7 @@
 <!--<form method="post"action="/rooms"accept="image/*"enctype="multipart/form-data"> #incorporate this-->
-#how to add required in rails forms?
-<%=form_for @pose do |t|%>
+#how to add required fields in rails forms?
+# add enctype="multipart/form-data"
+<%=form_for @pose, html: {multipart: true} do |t|%>
 <p>Pose name:<%=t.text_field :name%></p>
 <p>Description:<%=t.text_field :content%></p>
 <p>Attach image:<input type="file" name="pic" ></p>

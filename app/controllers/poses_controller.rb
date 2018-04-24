@@ -7,10 +7,18 @@ helper_method :params
   end
   def create
     #  binding.pry
-      pose= Pose.create(pose_params)
-      pose.user_id = current_user.id
-      current_user.poses << pose
+    pose= current_user.poses.create(pose_params)
+      # pose= Pose.create(pose_params)
+      # pose.user_id = current_user.id
+      # current_user.poses << pose
       redirect_to pose_path(pose)
+#params[:pic] has @tempfile and @original_filename
+      @filename = params[:pic][:original_filename]
+file = params[:pic][:tempfile]
+
+File.open("./public/#{@filename}", 'wb') do |f|
+f.write(file.read)
+end
   end
 
 
@@ -56,9 +64,7 @@ end
     if @pose.reviews.empty?
         @reviews= "No reviews yet."
     else
-      @reviews= @pose.reviews.map each do |review|
-
-      end
+      @reviews= @pose.reviews
     end
       @review= @pose.reviews.build
   end

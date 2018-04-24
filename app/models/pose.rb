@@ -5,7 +5,7 @@ class Pose < ApplicationRecord
    has_many :reviews
    belongs_to :user
    accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
-
+has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }
    # def category_ids=  #should we need this?
    # end
 
