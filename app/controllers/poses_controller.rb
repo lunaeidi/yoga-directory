@@ -57,12 +57,11 @@ end
     if @pose.reviews.empty?
         @reviews= "No reviews yet."
     else
-      array= []
-      @pose.reviews.each do |review|
-        review.content
+      @reviews= @pose.reviews.map each do |review|
+        
       end
     end
-    @review= @pose.reviews.build
+      @review= @pose.reviews.build
   end
 
 #,

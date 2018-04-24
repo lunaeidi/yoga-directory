@@ -8,7 +8,20 @@
 <%end%>
 </ul>
 <br>
+<%if @reviews != "No reviews yet."%>
+<h3>Reviews:</h3>
+<ul>
+<%@reviews.each do |review|%>
+<%binding.pry%>
+<li><%=review.user.username%> says: <%=review.content%><li>
+   #cant do it this way because returns nil for empty review, but it does register if statement! works for pose/2
+   #was showing review when mapped them in controller but that waycould access user.
+</ul>
+<%end%>
+
+<%else%>
 <p><%=@reviews%></p>
+<%end%>
 
 
 
