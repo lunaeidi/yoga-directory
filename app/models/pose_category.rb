@@ -1,4 +1,4 @@
 class PoseCategory < ApplicationRecord
-  belongs_to :poses
-  belongs_to :categories
+  belongs_to :pose
+  belongs_to :category
 end

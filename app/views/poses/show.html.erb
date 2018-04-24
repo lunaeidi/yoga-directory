@@ -1,7 +1,11 @@
 <img src="">
 <h1><%=@pose.name%></h1>
 <h3><%=@pose.content%></h3>
-
+<ul>
+<%@pose.categories.each do |category|%>
+<li><%=category.name%> </li>
+<%end%>
+</ul>
 
 <ul>
 <%=@pose.reviews.each do |review|%>
@@ -11,6 +15,20 @@
 </li>
 <%end%>
 </ul>
+
+
+<h1>Write a review</h1>
+<%=form_for @review do |f|%>
+<%=f.text_field :content%>
+<%=f.hidden_field :pose_id, value:@pose.id%>
+<%=f.collection_select(:user_id, User.all, :id, :username, include_blank: 'Any')%> #cange to the user thats logged in
+<!--options = {:include_blank}-->
+<h4>Or create a new user:</h4>
+<%= f.fields_for :user, @review.build_user do |users_fields| %>
+  <%= users_fields.text_field :username %>
+<% end %>
+<%=f.submit%>
+<%end%>
 
 <%if current_user == @pose.user_id%> #Links to edit and delete
 

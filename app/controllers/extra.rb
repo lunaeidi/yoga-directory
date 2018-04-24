@@ -8,7 +8,9 @@ helper_method :params
   def create
     #  binding.pry
       pose= Pose.create(pose_params)
-
+      pose.user_id = current_user.id
+      current_user.poses << pose
+      redirect_to pose_path(pose)
   end
 
 
@@ -32,9 +34,7 @@ end
   def index
     #@user= User.find(session[:user_id])
     @poses=Pose.all
-
-
-# @categories= Category.all
+  # @categories= Category.all
   #  @levels= Level.all
   #
   #   if !params[:level].blank?
@@ -48,16 +48,15 @@ end
     # if no filters are applied, show all poses
   #  @poses = Pose.all
   #end
-
+end
   end
   def show
     @pose=Pose.find(params[:id])
     #@review= @pose.reviews.build
   end
-
-#,
+end
+#reviews_attributes: [:content],
 private
 def pose_params
-  params.require(:pose).permit(:name,:content,:image, :level_id,reviews_attributes: [:content], category_ids:[])
-end
+  params.require(:pose).permit(:name,:content,:image, :level_id,  category_ids:[])
 end
