@@ -8,7 +8,11 @@
   <%  if !params[:level].blank?%>
   <%  @poses=Pose.where(level: params[:level])%>
       <%elsif !params[:category].blank?%> #change to categories?
-     <%@poses.Pose.includes(:categories).where(categories: {name:'seated'})%>
+
+ <%@poses.Pose.includes(:categories).where(categories: {name:'seated'})%>
+
+     <%@poses.Pose.includes(:categories).where(categories: params[:categories])%> #doesnt work
+
     <%end%>
 <div>
   <h3>Filter poses by:</h3>

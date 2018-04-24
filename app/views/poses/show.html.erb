@@ -2,41 +2,35 @@
 <h1><%=@pose.name%></h1>
 <h3><%=@pose.content%></h3>
 <ul>
+  <h3>Categories:</h3>
 <%@pose.categories.each do |category|%>
 <li><%=category.name%> </li> #dont need category show pages bcause havefilter feature
 <%end%>
 </ul>
-<%if @pose.reviews.empty?%>
-<p>No reviews yet.</p>
-<%else%>
-<ul>
-  <%=@pose.reviews.each do |review|%> #isplaying has many thru lab
-<li>
-<%=link_to review.user.username, user_path(review.user)%> says <%=review.content%>
-#not sure if have user path
-</li>
-<%end%>
-</ul>
-<%end%>
+<br>
+<p><%=@reviews%></p>
+
 
 
 <h1>Write a review</h1>
 <%=form_for @review do |f|%>
-<%=f.text_field :content%>
+<%=f.text_area :content%>
 <%=f.hidden_field :pose_id, value:@pose.id%>
-<%=f.collection_select(:user_id, User.all, :id, :username, include_blank: 'Any')%> #cange to the user thats logged in
-<!--options = {:include_blank}-->
+<%=f.hidden_field :user_id, value:current_user.id%>
 <h4>Or create a new user:</h4>
 <%= f.fields_for :user, @review.build_user do |users_fields| %>
   <%= users_fields.text_field :username %>
 <% end %>
 <%=f.submit%>
 <%end%>
-
-<%if current_user == @pose.user_id%> #Links to edit and delete
-
-<form method="post"action="/poses/<%=@pose.id%>/delete"> #will this one work??
+<br><br>
+<%if logged_in?%>
+<%if current_user.id == @pose.user_id%>
+<form method="post"action="/poses/<%=@pose.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit"value="delete">
 </form>
+<p><%=link_to "Edit Listing", edit_pose_path(@pose)%></p>
 <%end%>
+<%end%>
+<a href="/poses">Go back to all poses</a>

@@ -54,6 +54,14 @@ end
   end
   def show
     @pose=Pose.find(params[:id])
+    if @pose.reviews.empty?
+        @reviews= "No reviews yet."
+    else
+      array= []
+      @pose.reviews.each do |review|
+        review.content
+      end
+    end
     @review= @pose.reviews.build
   end
 
