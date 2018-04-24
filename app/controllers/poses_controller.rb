@@ -8,7 +8,9 @@ helper_method :params
   def create
     #  binding.pry
       pose= Pose.create(pose_params)
-
+      pose.user_id = current_user.id
+      current_user.poses << pose
+      redirect_to pose_path(pose)
   end
 
 
@@ -52,7 +54,7 @@ end
   end
   def show
     @pose=Pose.find(params[:id])
-    #@review= @pose.reviews.build
+    @review= @pose.reviews.build
   end
 
 #,

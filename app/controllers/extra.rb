@@ -52,7 +52,7 @@ end
   end
   def show
     @pose=Pose.find(params[:id])
-    #@review= @pose.reviews.build
+    @review= @pose.reviews.build
   end
 end
 #reviews_attributes: [:content],
