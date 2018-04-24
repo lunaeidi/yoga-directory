@@ -32,8 +32,8 @@ helper_method :params
   end
 end
   def index
-    #@user= User.find(session[:user_id])
-    @poses=Pose.all
+    @user= User.find(session[:user_id])
+        @poses=Pose.all
 
 
 # @categories= Category.all

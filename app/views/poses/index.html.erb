@@ -1,28 +1,33 @@
+
 <%if logged_in?%>
-<h1>Hi, you are logged in as <%current_user%></h1> #should be current_user.username ?
+<h2>Hi, you are logged in as <%=@user.username%></h2>
+<br>
+<%=link_to "Create New Pose", new_pose_path%>
 <%end%>
 
   <%  if !params[:level].blank?%>
-
   <%  @poses=Pose.where(level: params[:level])%>
-    #then check category
-  <%elsif !params[:category].blank?%> #change to categories?
+      <%elsif !params[:category].blank?%> #change to categories?
 
-    <%@poses=Pose.where(category: params[:category])%> #or might need to do .include? since its many categories
+     #or might need to do .include? since its many categories
+     <%@poses=Pose.where(category: params[:category])%>
+    <%@poses= Pose.where(categories.include?(params[:category]))%> #doesnt work either. is this valid for where
 <%end%>
 <div>
-  <h3>Filter poses:</h3>
+  <h3>Filter poses by:</h3>
   <%= form_tag("/poses", method: "get") do %>
+  <p>category:
 <%= select_tag "categories", options_from_collection_for_select(Category.all, "id", "name"), include_blank: true %>
+or level:
     <%= select_tag "level", options_from_collection_for_select(Level.all, "id", "level"), include_blank: true %>
-    <%= submit_tag "Filter" %>
+  </p>  <%= submit_tag "Filter" %>
   <% end %>
 </div>
-#how to filter by both things at once?
+#how to filter by both things at once? should i do filter by many categories check_boxes?
 
 <%@poses.all.each do |pose|%>
-<p><%=pose.image%></h1>
-<h1><%=link_to pose.name,pose_path(pose)%></h1>
+<p><%=pose.image%></p>
+<h2><%=link_to pose.name,pose_path(pose)%></h2>
 <h4><%=pose.level.level%></h4>
 <br>
 <%end%>
