@@ -5,12 +5,7 @@
 <%=link_to "Create New Pose", new_pose_path%>
 <%end%>
 
-  <%  if !params[:level].blank?%>
-  <%  @poses=Pose.where(level: params[:level])%>
-      <%elsif !params[:categories].blank?%> #change to categories?
-      <%@poses=Pose.includes(:categories).where(categories: {id:params[:categories]})%> #doesnt work
 
-    <%end%>
 <div>
   <h3>Filter poses by:</h3>
   <%= form_tag("/poses", method: "get") do %>

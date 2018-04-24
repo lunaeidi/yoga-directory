@@ -33,23 +33,22 @@ helper_method :params
 end
   def index
     @user= User.find(session[:user_id])
-        @poses=Pose.all
+      #  @poses=Pose.all
+@categories= Category.all
+   @levels= Level.all
 
-
-# @categories= Category.all
-  #  @levels= Level.all
-  #
-  #   if !params[:level].blank?
-  # #  @poses =  Pose.by_level(params[:level])
-  #   @poses=Pose.where(level: params[:level])
-  #   #then check category
-  # elsif !params[:category].blank?
-  # #  @poses= Pose.by_category(params[:category])
-  #   @poses=Pose.where(category: params[:category]) #or might need to do .include? since its many categories
-  #  else
+    if !params[:level].blank?
+    @poses =  Pose.by_level(params[:level])
+  elsif !params[:categories].blank?
+      @poses= Pose.includes(:categories).where(categories: {id: params[:categories]})
+   #@poses= Pose.by_category(params[:categories])
+     else
     # if no filters are applied, show all poses
-  #  @poses = Pose.all
-  #end
+   @poses = Pose.all
+  end
+
+
+
 
   end
   def show
@@ -58,7 +57,7 @@ end
         @reviews= "No reviews yet."
     else
       @reviews= @pose.reviews.map each do |review|
-        
+
       end
     end
       @review= @pose.reviews.build
