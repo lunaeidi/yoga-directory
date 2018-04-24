@@ -8,11 +8,8 @@
   <%  if !params[:level].blank?%>
   <%  @poses=Pose.where(level: params[:level])%>
       <%elsif !params[:category].blank?%> #change to categories?
-
-     #or might need to do .include? since its many categories
-     <%@poses=Pose.where(category: params[:category])%>
-    <%@poses= Pose.where(categories.include?(params[:category]))%> #doesnt work either. is this valid for where
-<%end%>
+     <%@poses.Pose.includes(:categories).where(categories: {name:'seated'})%>
+    <%end%>
 <div>
   <h3>Filter poses by:</h3>
   <%= form_tag("/poses", method: "get") do %>
