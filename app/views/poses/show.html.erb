@@ -1,4 +1,5 @@
 
+
 <h1><%=@pose.name%></h1>
 <h3><%=@pose.content%></h3>
 <ul>
@@ -13,11 +14,15 @@
 <ul>
 <%@reviews.each do |review|%>
 
-<li><%=review.content%><li>
-   #cant do it this way because returns nil for empty review, but it does register if statement! works for pose/2
-   #was showing review when mapped them in controller but that waycould access user.
-</ul>
+<li><%=review.user.username%> says <%=review.content%><li>
+   </ul>
 <%end%>
+#works if i take out the review.user.username
+
+#cant do it this way because returns nil for empty review, but it does register if statement. works for pose/2
+#when used binding.pry showed another extra empty review
+but binding.pry in controller only showed the right reviews
+#was showing review when mapped them in controller but that way couldn't access user.
 
 <%else%>
 <p><%=@reviews%></p>
