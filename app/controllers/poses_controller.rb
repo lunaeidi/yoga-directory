@@ -1,23 +1,31 @@
 require 'pry'
 class PosesController < ApplicationController
+
 helper_method :params
   def new
-
+    if !logged_in?
+      return redirect_to controller:'sessions', action:'new'
+      flash[:message]= "You must be logged in to list a pose."
+    end
     @pose= Pose.new
   end
   def create
     #  binding.pry
     pose= current_user.poses.create(pose_params)
+    #@picname= params[:pose][:pic].original_filename #didnttransfer to view !
+    binding.pry
 
-  #  pose.pic= params[pose][:pic] #dont need this
-      # pose= Pose.create(pose_params)
+        # pose= Pose.create(pose_params)
       # pose.user_id = current_user.id
       # current_user.poses << pose
       redirect_to pose_path(pose)
-    binding.pry
+
+
 #params[:pic] has @tempfile and @original_filename
-      @filename = params[:pic].original_filename
-file = params[:pic].tempfile
+      @filename = params[:pose][:pic].original_filename #need to change these to include [pose]
+file = params[:pose][:pic].tempfile
+# .to_path.to_s  #instead of just tempfile
+
 
 File.open("./public/#{@filename}", 'wb') do |f|
 f.write(file.read)
@@ -28,10 +36,23 @@ end
 
   def edit
     @pose=Pose.find(params[:id])
+    if !logged_in?
+      return redirect_to controller:'sessions', action:'new'
+      flash[:message]= "You must be logged in to do that."
+    end
+    if @pose.user_id != current_user.id
+      return redirect_to poses_path
+      flash[:message]= "You don't have permission to do that."
+    end
+
+
+
+
   end
   def update
     @pose=Pose.find(params[:id])
     @pose.update(pose_params)
+    redirect_to pose_path(@pose)
   end
   def destroy
     @pose=Pose.find(params[:id])
@@ -43,7 +64,7 @@ end
   end
 end
   def index
-    @user= User.find(session[:user_id])
+    @user= User.find(session[:user_id]) if session[:user_id]
       #  @poses=Pose.all
 @categories= Category.all
    @levels= Level.all
@@ -51,11 +72,9 @@ end
     if !params[:level].blank?
     @poses =  Pose.by_level(params[:level])
   elsif !params[:categories].blank?
-      #@poses= Pose.includes(:categories).where(categories: {id: params[:categories]})
-   @poses= Pose.by_category(params[:categories])
+         @poses= Pose.by_category(params[:categories])
      else
-    # if no filters are applied, show all poses
-   @poses = Pose.all
+       @poses = Pose.all
   end
   end
 
