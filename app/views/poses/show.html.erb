@@ -42,7 +42,8 @@
 <br><br>
 <%if logged_in?%>
 <%if current_user.id == @pose.user_id%>
-<form method="post"action="/poses/<%=@pose.id%>/delete"> #no route matches delete
+<form method="post"action="/poses/<%=@pose.id%>"> 
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit"value="delete">
 </form>
