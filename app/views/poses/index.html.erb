@@ -5,6 +5,8 @@
 <h2>Hi, you are logged in as <%=@user.username%></h2>
 <br>
 <%=link_to "Create New Pose", new_pose_path%>
+<%else%>
+<p><%=link_to "Log in", controller:'sessions',action:'new'%> or <%=link_to "sign up",controller:'users',action:'new'%> to list a pose </p>
 <%end%>
 
 
@@ -29,6 +31,7 @@ or level:
 <%if logged_in?%>
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
+
 <% end %>
 
 <%end%>

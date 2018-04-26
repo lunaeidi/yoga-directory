@@ -4,14 +4,12 @@
 <%= image_tag @pose.image.url %>
 
 
-
-
 <h1><%=@pose.name%></h1>
 <h3><%=@pose.content%></h3>
 <ul>
   <h3>Categories:</h3>
 <%@pose.categories.each do |category|%>
-<li><%=category.name%> </li> 
+<li><%=category.name%> </li>
 <%end%>
 </ul>
 <br>
@@ -28,22 +26,20 @@
 <%else%>
 <p><%=@reviews%></p>
 <%end%>
+<%if !logged_in?%>
+<p><%=link_to "Log In",controller:'sessions',action:'new'%> or <%=link_to "sign up",controller:'users',action:'new'%> to write a review!</p>
+<%end%>
 
-
-
+<%if logged_in?%>
 <h1>Write a review</h1>
 <%=form_for @review do |f|%>
 <%=f.text_area :content%>
 <%=f.hidden_field :pose_id, value:@pose.id%>
 <%=f.hidden_field :user_id, value:current_user.id%>
-<h4>Or create a new user:</h4>
-<%= f.fields_for :user, @review.build_user do |users_fields| %>
-  <%= users_fields.text_field :username %>
-<% end %>
 <%=f.submit%>
 <%end%>
 <br><br>
-<%if logged_in?%>
+
 <%if current_user.id == @pose.user_id%>
 <form method="post"action="/poses/<%=@pose.id%>">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

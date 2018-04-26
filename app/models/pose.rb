@@ -9,12 +9,9 @@ class Pose < ApplicationRecord
 has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
-
-
-    validates :name, presence: true
-    validates :content, presence: true
-validates :image, presence: true #isnt letting entries get saved even if they have the image...
-#maybe has something todo with avatar problem
+  validates :name, presence: true
+ validates :content, presence: true
+  validates :image, presence: true
 
   def self.by_level(level_id)
 where(level: level_id)
