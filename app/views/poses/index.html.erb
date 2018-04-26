@@ -1,4 +1,6 @@
-
+<%flash.each do |name,value|%>
+<%=value%>
+<%end%>
 <%if logged_in?%>
 <h2>Hi, you are logged in as <%=@user.username%></h2>
 <br>

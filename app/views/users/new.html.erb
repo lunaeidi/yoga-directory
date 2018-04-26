@@ -1,4 +1,6 @@
-
+<%flash.each do |name,value|%>
+<%=value%>
+<%end%>
 <h1>Create Account!</h1>
 <%=form_tag ({controller:'users',action:'create',method:'post'}) do%>
 <p>Username:<input type="text"name="username"required></p>

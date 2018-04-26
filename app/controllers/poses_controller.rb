@@ -4,8 +4,9 @@ class PosesController < ApplicationController
 helper_method :params
   def new
     if !logged_in?
+
+      flash[:error]= "You must be logged in to list a pose."
       return redirect_to controller:'sessions', action:'new'
-      flash[:message]= "You must be logged in to list a pose."
     end
     @pose= Pose.new
   end
@@ -36,12 +37,14 @@ helper_method :params
   def edit
     @pose=Pose.find(params[:id])
     if !logged_in?
+      flash[:error]= "You must be logged in to do that."
       return redirect_to controller:'sessions', action:'new'
-      flash[:message]= "You must be logged in to do that."
+
     end
     if @pose.user_id != current_user.id
+      flash[:error]= "You don't have permission to do that."
       return redirect_to poses_path
-      flash[:message]= "You don't have permission to do that."
+
     end
 
 

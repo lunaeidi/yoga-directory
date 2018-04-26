@@ -17,7 +17,7 @@ render 'users/home' #is this interchangeable with redirect_to controller:'....' 
        session[:user_id]= user.id
        return redirect_to poses_path
      else
-       flash[:message]= "Invalid username or password" #does this work? u need the middleware use flash? or just :alert?
+       flash[:error]= "Invalid username or password" #does this work? u need the middleware use flash? or just :alert?
        redirect_to controller: 'sessions', action: 'new'
      end
    end
