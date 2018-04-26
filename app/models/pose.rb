@@ -5,7 +5,9 @@ class Pose < ApplicationRecord
    has_many :reviews
    belongs_to :user
    accepts_nested_attributes_for :reviews, reject_if: proc { |attributes| attributes['content'].blank? }
-has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }
+#has_attached_file :image, styles: { small: "64x64", med: "100x100", large: "200x200" }
+has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
    # def category_ids=  #should we need this?
    # end
 

@@ -12,7 +12,7 @@ helper_method :params
   def create
     #  binding.pry
     pose= current_user.poses.create(pose_params)
-    #@picname= params[:pose][:pic].original_filename #didnttransfer to view !
+    #@picname= params[:pose][:pic].original_filename #this does not work either
     binding.pry
 
         # pose= Pose.create(pose_params)
@@ -21,15 +21,14 @@ helper_method :params
       redirect_to pose_path(pose)
 
 
-#params[:pic] has @tempfile and @original_filename
-      @filename = params[:pose][:pic].original_filename #need to change these to include [pose]
-file = params[:pose][:pic].tempfile
-# .to_path.to_s  #instead of just tempfile
-
-
-File.open("./public/#{@filename}", 'wb') do |f|
-f.write(file.read)
-end
+# #params[:pose][:pic] has @tempfile and @original_filename
+#       @filename = params[:pose][:pic].original_filename
+# file = params[:pose][:pic].tempfile
+# # .to_path.to_s  #instead of just tempfile ?
+#
+# File.open("./public/#{@filename}", 'wb') do |f|
+# f.write(file.read)
+# end
   end
 
 
@@ -97,6 +96,6 @@ end
 
 private
 def pose_params
-  params.require(:pose).permit(:name,:content,:pic, :level_id,reviews_attributes: [:content], category_ids:[])
+  params.require(:pose).permit(:name,:content,:pic,:image, :level_id,reviews_attributes: [:content], category_ids:[])
 end
 end
