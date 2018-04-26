@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
 
-  resources :users, only: [:index,:show]
+  resources :users, only: [:index,:show] do
+    resources :poses, only: [:show, :new, :edit, :index]
+  end
 
 #should nest poses within users?
 #   resources :posts do

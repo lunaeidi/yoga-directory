@@ -1,6 +1,9 @@
+
+<img src="../../../../public/<%=@pose.pic%>"width="200"height="200">
+
 <%= image_tag @pose.image.url %>
-<%= image_tag @pose.image.url(:medium) %>
-<%= image_tag @pose.image.url(:thumb) %>
+
+
 
 
 <h1><%=@pose.name%></h1>
@@ -8,7 +11,7 @@
 <ul>
   <h3>Categories:</h3>
 <%@pose.categories.each do |category|%>
-<li><%=category.name%> </li> #dont need category show pages bcause havefilter feature
+<li><%=category.name%> </li> 
 <%end%>
 </ul>
 <br>
@@ -42,7 +45,7 @@
 <br><br>
 <%if logged_in?%>
 <%if current_user.id == @pose.user_id%>
-<form method="post"action="/poses/<%=@pose.id%>"> 
+<form method="post"action="/poses/<%=@pose.id%>">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit"value="delete">

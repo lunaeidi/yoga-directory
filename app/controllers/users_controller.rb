@@ -18,6 +18,9 @@ session[:user_id] = @user.id
 redirect_to poses_path
   end
 end
+def show
+  @user= User.find(params[:id])
+end
 def home
 
     redirect_to poses_path   if logged_in?

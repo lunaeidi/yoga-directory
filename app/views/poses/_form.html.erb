@@ -4,7 +4,7 @@
 <p>Pose name:<%=t.text_field :name, required: true%></p>
 <p>Description:<%=t.text_field :content, required: true%></p>
 <p>Attach image:<input type="file" name="pose[pic]" accept="image/png,image/gif,image/jpeg" ></p>
- <p>Attach paperclip Image:<%= t.file_field :avatar, required: true %></p>
+ <p>Attach paperclip Image:<%= t.file_field :image, required: true %></p>
 <%=t.collection_check_boxes :category_ids, Category.all, :id, :name%>
 <p>Level:<%=t.collection_select :level_id, Level.all, :id, :level%></p>
 <br>

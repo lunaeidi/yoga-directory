@@ -19,9 +19,9 @@ or level:
   <% end %>
 </div>
 #how to filter by both things at once? should i do filter by many categories check_boxes?
-
+<br>
 <%@poses.all.each do |pose|%>
-#put img tag here
+<%= image_tag pose.image.url(:thumb) %>
 <h2><%=link_to pose.name,pose_path(pose)%></h2>
 <h4><%=pose.level.level%></h4>
 <br>

@@ -4,7 +4,6 @@ class PosesController < ApplicationController
 helper_method :params
   def new
     if !logged_in?
-
       flash[:error]= "You must be logged in to list a pose."
       return redirect_to controller:'sessions', action:'new'
     end
@@ -12,21 +11,24 @@ helper_method :params
   end
   def create
       pose= current_user.poses.create(pose_params)
+      pose.pic= params[:pose][:pic].original_filename
+      pose.save #dont forget this, used inspect element and noticed tht the action dispatch was gettigshown in img tag
+      binding.pry
     #@picname= params[:pose][:pic].original_filename #this does not work either
   #binding.pry
-      redirect_to poses_path
-      #redirect_to "poses/#{@pose.id}"
+      #redirect_to poses_path
+      redirect_to "poses/#{pose.id}"
        #pose_path(pose)
 
 
 # #params[:pose][:pic] has @tempfile and @original_filename
-#       @filename = params[:pose][:pic].original_filename
-# file = params[:pose][:pic].tempfile
-# # .to_path.to_s  #instead of just tempfile ?
-#
-# File.open("./public/#{@filename}", 'wb') do |f|
-# f.write(file.read)
-# end
+      @filename = params[:pose][:pic].original_filename
+file = params[:pose][:pic].tempfile
+# .to_path.to_s  #instead of just tempfile ?
+
+File.open("./public/#{@filename}", 'wb') do |f|
+f.write(file.read)
+end
   end
 
 
