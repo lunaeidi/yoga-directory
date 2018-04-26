@@ -11,6 +11,11 @@ has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, def
    # def category_ids=  #should we need this?
    # end
 
+    validates :name, presence: true
+    validates :content, presence: true
+#validates :image, presence: true => isnt letting entries get saved even if they have the image...
+#maybe has something todo with avatar problem
+
   def self.by_level(level_id)
 where(level: level_id)
 end

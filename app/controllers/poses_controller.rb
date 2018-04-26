@@ -11,15 +11,12 @@ helper_method :params
     @pose= Pose.new
   end
   def create
-    #  binding.pry
-    pose= current_user.poses.create(pose_params)
+      pose= current_user.poses.create(pose_params)
     #@picname= params[:pose][:pic].original_filename #this does not work either
-    binding.pry
-
-        # pose= Pose.create(pose_params)
-      # pose.user_id = current_user.id
-      # current_user.poses << pose
-      redirect_to pose_path(pose)
+  #binding.pry
+      redirect_to poses_path
+      #redirect_to "poses/#{@pose.id}"
+       #pose_path(pose)
 
 
 # #params[:pose][:pic] has @tempfile and @original_filename
