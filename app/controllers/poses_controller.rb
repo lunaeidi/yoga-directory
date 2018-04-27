@@ -44,8 +44,11 @@ end
   end
   def update
     @pose=Pose.find(params[:id])
-    @pose.update(pose_params)
+  if  @pose.update(pose_params)
     redirect_to pose_path(@pose)
+  else
+    redirect_to controller:'poses', action:'edit'
+  end
   end
   def destroy
     @pose=Pose.find(params[:id])
