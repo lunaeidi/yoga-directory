@@ -6,7 +6,7 @@ class PosesController < ApplicationController
       flash[:error]= "You must be logged in to list a pose."
       return redirect_to controller:'sessions', action:'new'
     end
-    @pose= Pose.new
+    @pose= Pose.new(level_id: params[:level_id])
 
     end
   def create
@@ -60,7 +60,18 @@ end
   end
 end
   def index
-    @user= User.find(session[:user_id]) if session[:user_id]
+      @user= User.find(session[:user_id]) if session[:user_id]
+    if params[:level_id]
+      @level= Level.find_by(id: params[:level_id])
+      if @level.nil?
+        flash[:message]= "Level not found."
+        redirect_to levels_path
+      else
+      @poses= @level.poses
+      end
+
+    else
+
       #  @poses=Pose.all
 @categories= Category.all
    @levels= Level.all
@@ -73,8 +84,10 @@ end
        @poses = Pose.all
   end
   end
+end
 
   def show
+
 
     @pose=Pose.find(params[:id])
     if @pose.reviews.empty?

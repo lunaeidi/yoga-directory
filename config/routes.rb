@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :reviews
   resources :poses
   resources :categories
+  resources :levels, only: [:show] do
+    resources :poses, only: [:show, :new, :index]
+  end 
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
