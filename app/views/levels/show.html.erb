@@ -1,7 +1,7 @@
 <h1><%=@level.level%></h1>
 <%=link_to "New pose", new_level_pose_path(@level)%>
 <p><%=@level.level%> poses : </p>
-<%=@level.poses.each do |pose|%>
+<%@level.poses.each do |pose|%>
 <%= image_tag pose.image.url(:thumb) %>
 <br>
 <%=link_to pose.name, pose_path(pose)%> - <%=pose.level.level%>

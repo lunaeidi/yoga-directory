@@ -1,5 +1,5 @@
 <h1><%=@user.username%>'s Poses</h1>
-<%=@user.poses.each do |pose|%>
+<%@user.poses.each do |pose|%>
 <%= image_tag pose.image.url(:thumb) %>
 <br>
 <%=link_to pose.name, pose_path(pose)%> - <%=pose.level.level%>
