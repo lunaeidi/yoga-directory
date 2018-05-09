@@ -13,9 +13,8 @@
 <div class="field">
 <p>Description:<%=t.text_field :content, required: true %></p>
 </div>
-<p>Attach image:<input type="file" name="pose[pic]" accept="image/png,image/gif,image/jpeg" ></p>
 <div class="field">
- <p>Attach paperclip Image:<%= t.file_field :image, required: true %></p>
+ <p>Attach Image:<%= t.file_field :image, required: true %></p>
 </div>
 <%=t.collection_check_boxes :category_ids, Category.all, :id, :name%>
 

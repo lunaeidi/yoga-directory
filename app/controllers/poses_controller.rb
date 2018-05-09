@@ -1,6 +1,6 @@
 require 'pry'
 class PosesController < ApplicationController
-
+before_action :find_by_id, only: [:edit,:update,:destroy, :show]
   def new
     if !logged_in?
       flash[:error]= "You must be logged in to list a pose."
@@ -11,10 +11,8 @@ class PosesController < ApplicationController
     end
   def create
           pose= current_user.poses.new(pose_params)
-      #pose.pic= params[:pose][:pic].original_filename
-    if pose.valid?
-      pose.save #dont forget this, used inspect element and noticed tht the action dispatch was gettigshown in img tag
-
+          if pose.valid?
+      pose.save
       redirect_to poses_path
 #redirect_to "poses/#{pose.id}"
 
@@ -26,7 +24,6 @@ end
 
 
   def edit
-    @pose=Pose.find(params[:id])
     if !logged_in?
       flash[:error]= "You must be logged in to do that."
       return redirect_to controller:'sessions', action:'new'
@@ -35,24 +32,18 @@ end
     if @pose.user_id != current_user.id
       flash[:error]= "You don't have permission to do that."
       return redirect_to poses_path
-
     end
-
-
-
-
   end
+
   def update
-    @pose=Pose.find(params[:id])
-  if  @pose.update(pose_params)
+    if  @pose.update(pose_params)
     redirect_to pose_path(@pose)
   else
     redirect_to controller:'poses', action:'edit'
   end
   end
   def destroy
-    @pose=Pose.find(params[:id])
-    if current_user.id == @pose.user_id
+        if current_user.id == @pose.user_id
       @pose.delete
       redirect_to poses_path
     else
@@ -69,9 +60,7 @@ end
       else
       @poses= @level.poses
       end
-
     else
-
       #  @poses=Pose.all
 @categories= Category.all
    @levels= Level.all
@@ -87,18 +76,10 @@ end
 end
 
   def show
-
-
-    @pose=Pose.find(params[:id])
-    if @pose.reviews.empty?
+      if @pose.reviews.empty?
         @reviews= "No reviews yet."
     else
-    #  binding.pry
-      @reviews= @pose.reviews
-      #tried doing it here with:
-      #@pose.reviews.map do |review|
-      #review.user.username says review.content
-    #end
+        @reviews= @pose.reviews
     end
       @review= Review.new
   end
@@ -108,4 +89,8 @@ private
 def pose_params
   params.require(:pose).permit(:name,:content,:pic,:image, :level_id,reviews_attributes: [:content], category_ids:[])
 end
+def find_by_id
+@pose=Pose.find(params[:id])
+end
+
 end
