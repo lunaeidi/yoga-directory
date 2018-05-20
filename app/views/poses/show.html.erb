@@ -55,10 +55,29 @@ $(function () {
   $(".js-next").on("click", function() {
     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
     $.getJSON("/posts/" + nextId + ".json", function(data) {
-      $(".poseCategories").text(data["categories"]); //dont know if this will be enough
+
+      //$(".poseCategories").text(data["categories"]);
       $(".poseName").text(data["name"]);
       $(".poseContent").text(data["content"]);
-      $(".postBody").text(data["image"]);
+      $(".poseImage").text(data["image"]);
+
+      var categories= data["categories"]
+      categoryNames=''
+      categories.forEach(function(category){
+        categoryNames+= category["name"]
+      })
+      $(".poseCategories").text(categoryNames) //or html? but didnt put any html tags
+
+      if (data["reviews"].length > 0){
+             var reviews = product["reviews"];
+             var reviewContents = "";
+             reviews.forEach(function(order) { //this is the line causing the error
+               //debugger
+               orderContents += review["content"]
+             });
+             $("#product-" + id + "-orders").text(orderContents);
+           }
+
       // re-set the id to current on the link
       $(".js-next").attr("data-id", data["id"]);
     });
