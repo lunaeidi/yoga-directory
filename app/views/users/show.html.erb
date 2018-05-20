@@ -8,31 +8,22 @@
 <br><br>
 
 <%end%>
-
+<div class="poses">
+</div>
 <script type="text/javascript" charset="utf-8">
 $(function() {
   $(".load-poses").on("click", function() {
     var userid = $(this).data("id");
-    $.get("/poses/" + userid + ".json", function(data) {
+    $.get("/users/" + userid + ".json", function(data) {
 
     var poses= data["poses"];
-    poses.forEach(function(pose){ //attach these to a div 
+    var poseDetails=""
+    poses.forEach(function(pose){
       pose["name"]
       pose["image"]
       pose["level"]["level"]
+      $(".poses").append("<p>"+ pose["name"] + ' - '+ pose["level"]["level"] + "</p>"+"<br>") 
     })
-
-      var descriptionText = "<p>" + product["description"] + "</p><p>" + inventoryText + "</p>";
-      $("#product-" + id).html(descriptionText);
-      if (product["orders"].length > 0){
-        var orders = product["orders"]; //orders is undefined . product["orders"] is an empty array...
-        var orderDetails = "";
-        orders.forEach(function(order) { //this is the line causing the error
-          //debugger
-          orderDetails += "<p>" + order["id"] + order["created_at"] + "</p>"
-        });
-        $("#product-" + id + "-orders").html(orderDetails);
-      }
     });
   });
 });
