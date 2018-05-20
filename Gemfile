@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
-
+gem 'active_model_serializers'
 ruby '2.3.1'
 gem 'pry'
 gem 'paperclip'

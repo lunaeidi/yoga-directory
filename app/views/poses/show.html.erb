@@ -1,16 +1,13 @@
+<a href="#" class="js-next" data-id="<%=@pose.id%>">Next Pose</a>
+<div class="poseImage"><%= image_tag @pose.image.url %></div>
 
-
-
-<%= image_tag @pose.image.url %>
-
-
-<h1><%=@pose.name%></h1>
-<h3><%=@pose.content%></h3>
+<h1 class="poseName"><%=@pose.name%></h1>
+<h3 class="poseContent"><%=@pose.content%></h3>
 <ul>
-  <h3>Categories:</h3>
+<div class="poseCategories">  <h3>Categories:</h3>
 <%@pose.categories.each do |category|%>
 <li><%=category.name%> </li>
-<%end%>
+<%end%> </div>
 </ul>
 <br>
 <%if @reviews != "No reviews yet."%>
@@ -49,4 +46,22 @@
 <p><%=link_to "Edit Listing", edit_pose_path(@pose)%></p>
 <%end%>
 <%end%>
+
 <a href="/poses">Go back to all poses</a>
+
+
+<script type="text/javascript" charset="utf-8">
+$(function () {
+  $(".js-next").on("click", function() {
+    var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    $.getJSON("/posts/" + nextId + ".json", function(data) {
+      $(".poseCategories").text(data["categories"]); //dont know if this will be enough
+      $(".poseName").text(data["name"]);
+      $(".poseContent").text(data["content"]);
+      $(".postBody").text(data["image"]);
+      // re-set the id to current on the link
+      $(".js-next").attr("data-id", data["id"]);
+    });
+  });
+});
+</script>

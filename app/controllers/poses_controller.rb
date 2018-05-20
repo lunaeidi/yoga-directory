@@ -51,7 +51,9 @@ end
   end
 end
   def index
-      @user= User.find(session[:user_id]) if session[:user_id]
+      if session[:user_id]
+      @user= User.find(session[:user_id])
+    end
     if params[:level_id]
       @level= Level.find_by(id: params[:level_id])
       if @level.nil?
@@ -82,7 +84,12 @@ end
         @reviews= @pose.reviews
     end
       @review= Review.new
-  end
+      respond_to do |format|
+  format.html { render :show }
+  format.json { render json: @post, status: 200 } #but like this it returns null
+end
+      # render json: @pose, status: 200 the .json worked when it was just this
+    end
 
 
 private
