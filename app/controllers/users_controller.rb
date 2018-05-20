@@ -20,7 +20,12 @@ redirect_to poses_path
 end
 def show
   @user= User.find(params[:id])
+  respond_to do |format|
+format.html { render :show }
+format.json { render json: @user}
 end
+end
+
 def home
 
     redirect_to poses_path   if logged_in?

@@ -1,4 +1,6 @@
 <h1><%=@user.username%>'s Poses</h1>
+
+ <button class="load-poses" data-id="<%= @user.id %>">Load Poses</button></br>
 <%@user.poses.each do |pose|%>
 <%= image_tag pose.image.url(:thumb) %>
 <br>
@@ -6,3 +8,34 @@
 <br><br>
 
 <%end%>
+
+<script type="text/javascript" charset="utf-8">
+$(function() {
+  $(".load-poses").on("click", function() {
+    var userid = $(this).data("id");
+    $.get("/poses/" + userid + ".json", function(data) {
+
+    var poses= data["poses"];
+    poses.forEach(function(pose){ //attach these to a div 
+      pose["name"]
+      pose["image"]
+      pose["level"]["level"]
+    })
+
+      var descriptionText = "<p>" + product["description"] + "</p><p>" + inventoryText + "</p>";
+      $("#product-" + id).html(descriptionText);
+      if (product["orders"].length > 0){
+        var orders = product["orders"]; //orders is undefined . product["orders"] is an empty array...
+        var orderDetails = "";
+        orders.forEach(function(order) { //this is the line causing the error
+          //debugger
+          orderDetails += "<p>" + order["id"] + order["created_at"] + "</p>"
+        });
+        $("#product-" + id + "-orders").html(orderDetails);
+      }
+    });
+  });
+});
+</script>
+
+//make ajax here to get user's poses

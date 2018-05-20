@@ -54,12 +54,12 @@
 $(function () {
   $(".js-next").on("click", function() {
     var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-    $.getJSON("/posts/" + nextId + ".json", function(data) {
+        $.getJSON("/poses/" + nextId + ".json", function(data) {
 
       //$(".poseCategories").text(data["categories"]);
       $(".poseName").text(data["name"]);
       $(".poseContent").text(data["content"]);
-      $(".poseImage").text(data["image"]);
+      $(".poseImage").text(data["image"]); //not gonna work.
 
       var categories= data["categories"]
       categoryNames=''
@@ -71,15 +71,17 @@ $(function () {
       if (data["reviews"].length > 0){
              var reviews = product["reviews"];
              var reviewContents = "";
-             reviews.forEach(function(order) { //this is the line causing the error
-               //debugger
+             reviews.forEach(function(order) { //need to make the post review form work too here !
+
                orderContents += review["content"]
              });
              $("#product-" + id + "-orders").text(orderContents);
            }
-
+//debugger worked here
       // re-set the id to current on the link
       $(".js-next").attr("data-id", data["id"]);
+      alert(data["id"])
+//debugger
     });
   });
 });
