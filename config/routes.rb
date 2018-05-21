@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :categories
   resources :levels, only: [:show] do
     resources :poses, only: [:show, :new, :index]
-  end 
-
+  end
+  resources :pose_categories, only: [:new, :create]
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
