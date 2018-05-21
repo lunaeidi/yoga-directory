@@ -22,7 +22,9 @@ $(function() {
       pose["name"]
       pose["image"]
       pose["level"]["level"]
-      $(".poses").append("<p>"+ pose["name"] + ' - '+ pose["level"]["level"] + "</p>"+"<br>") 
+      var pic= pose["image"]
+      $(".poses").append('<img src="'+ pic +'">')
+      $(".poses").append("<p>"+ pose["name"] + ' - '+ pose["level"]["level"] + "</p>"+"<br>")
     })
     });
   });

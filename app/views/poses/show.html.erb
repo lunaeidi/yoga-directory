@@ -37,6 +37,37 @@
 <%end%>
 <br><br>
 
+ #is there a way to have the format "username says - content "
+  <ul id="review">
+  </ul>
+
+
+<script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+        event.preventDefault();
+       var result= $("form").val() //form returns a context sub element
+      //  var values= $(result).serialize() //use .val() to get value from form field
+      var values = $(this).serialize(); //THIS is a node list wich has this[2]= textarea and this[4]= user_id
+      //values is undefined
+
+      var id = parseInt($(".js-next").attr("data-id")) //this should get it from the current @pose.id
+
+      var posting = $.post('/poses/'+ id, values); //posting has 404 status 
+debugger //stops here
+      posting.done(function(data) {
+//debugger didnt stop here
+        var post = data;
+        var reviewText= "<li>" + post["user_id"] + " says " + post["content"] + "</li>"
+        $("#review").html(reviewText)
+        //$("#review").text(post["user_id"]); //need to attach more to make username show
+        //$("#review").text(post["content"]);
+      });
+    });
+  });
+</script>
+
+
 <%if current_user.id == @pose.user_id%>
 <form method="post"action="/poses/<%=@pose.id%>">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -77,11 +108,8 @@ $(function () {
              });
              $("#product-" + id + "-orders").text(orderContents);
            }
-//debugger worked here
-      // re-set the id to current on the link
-      $(".js-next").attr("data-id", data["id"]);
+        $(".js-next").attr("data-id", data["id"]);
       alert(data["id"])
-//debugger
     });
   });
 });
