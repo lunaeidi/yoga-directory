@@ -37,31 +37,40 @@
 <%end%>
 <br><br>
 
- #is there a way to have the format "username says - content "
   <ul id="review">
   </ul>
-
 
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('form').submit(function(event) {
         event.preventDefault();
-       var result= $("form").val() //form returns a context sub element
-      //  var values= $(result).serialize() //use .val() to get value from form field
-      var values = $(this).serialize(); //THIS is a node list wich has this[2]= textarea and this[4]= user_id
-      //values is undefined
+        function Review(username, content) {
+          this.username = username;
+          this.content = content;
+        }
+        Review.prototype.postReview = function() {
+            return `${this.username} says ${this.content} `
+        }
 
-      var id = parseInt($(".js-next").attr("data-id")) //this should get it from the current @pose.id
 
-      var posting = $.post('/poses/'+ id, values); //posting has 404 status 
-debugger //stops here
+
+      debugger
+//THIS is a node list wich has this[2]= textarea (and that has innerHTML and innerTEXT as "") and this[4]= user_id
+
+      var id = parseInt($(".js-next").attr("data-id"))
+
+      var posting = $.post('/reviews', $(this).serialize());
+
       posting.done(function(data) {
-//debugger didnt stop here
-        var post = data;
-        var reviewText= "<li>" + post["user_id"] + " says " + post["content"] + "</li>"
-        $("#review").html(reviewText)
-        //$("#review").text(post["user_id"]); //need to attach more to make username show
-        //$("#review").text(post["content"]);
+
+       var post = data;
+      //  var reviewText= "<li>" + post["user_id"] + " says " + post["content"] + "</li>" //need a way to turn this into username....
+      //  $("#review").html(reviewText)
+
+
+       var review2 = new Review(post["user_id"], post["content"]); // how to get username?
+          $("#review").html(review2.postReview())
+
       });
     });
   });
@@ -100,13 +109,13 @@ $(function () {
       $(".poseCategories").text(categoryNames) //or html? but didnt put any html tags
 
       if (data["reviews"].length > 0){
-             var reviews = product["reviews"];
+             var reviews = data["reviews"];
              var reviewContents = "";
-             reviews.forEach(function(order) { //need to make the post review form work too here !
+             reviews.forEach(function(review) { //need to make the post review form work too here !
 
-               orderContents += review["content"]
+               reviewContents += review["content"]
              });
-             $("#product-" + id + "-orders").text(orderContents);
+             $("#product-" + id + "-orders").text(reviewContents); //what is this line doing...
            }
         $(".js-next").attr("data-id", data["id"]);
       alert(data["id"])

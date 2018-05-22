@@ -86,7 +86,7 @@ end
       @review= Review.new
       respond_to do |format|
   format.html { render :show }
-  format.json { render json: @pose} #but like this it returns null
+  format.json { render json: @pose} 
 end
        #render json: @pose, status: 200 #the .json worked when it was just this
     end
