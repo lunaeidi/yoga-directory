@@ -54,7 +54,6 @@
 
 
 
-      debugger
 //THIS is a node list wich has this[2]= textarea (and that has innerHTML and innerTEXT as "") and this[4]= user_id
 
       var id = parseInt($(".js-next").attr("data-id"))
@@ -69,7 +68,8 @@
 
 
        var review2 = new Review(post["user_id"], post["content"]); // how to get username?
-          $("#review").html(review2.postReview())
+          $("#review").html(review2.postReview())  //with both of the 2 methods, at first page says "1 says..."
+          //then changes when refreshed.
 
       });
     });
@@ -93,8 +93,8 @@
 <script type="text/javascript" charset="utf-8">
 $(function () {
   $(".js-next").on("click", function() {
-    var nextId = parseInt($(".js-next").attr("data-id")) + 1;
-        $.getJSON("/poses/" + nextId + ".json", function(data) {
+    var nextId = parseInt($(".js-next").attr("data-id"))// + 1
+        $.getJSON("/poses/" + Id + "/next.json", function(data) { //data.id
 
       //$(".poseCategories").text(data["categories"]);
       $(".poseName").text(data["name"]);
@@ -115,7 +115,7 @@ $(function () {
 
                reviewContents += review["content"]
              });
-             $("#product-" + id + "-orders").text(reviewContents); //what is this line doing...
+             //$("#product-" + id + "-orders").text(reviewContents); //what is this line doing...
            }
         $(".js-next").attr("data-id", data["id"]);
       alert(data["id"])

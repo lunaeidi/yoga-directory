@@ -11,7 +11,7 @@
 <p><%=link_to "Log in", controller:'sessions',action:'new'%> or <%=link_to "sign up",controller:'users',action:'new'%> to list a pose </p>
 <%end%>
 
-<%if @poses == Pose.all%>  #we dont want filter feature for levels/1/poses page
+<%if @poses == Pose.all%>  
 <div>
   <h3>Filter poses by:</h3>
   <%= form_tag("/poses", method: "get") do %>
@@ -23,7 +23,7 @@ or level:
   <% end %>
 </div>
 <%end%>
-#how to filter by both things at once? should i do filter by many categories check_boxes?
+
 <br>
 <%@poses.each do |pose|%>
 <%= image_tag pose.image.url(:thumb) %>

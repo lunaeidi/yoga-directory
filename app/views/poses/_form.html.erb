@@ -4,7 +4,7 @@
          <li><%= message %></li>
 <% end %>
 <%end%>
-# add enctype="multipart/form-data"
+
 <%=form_for @pose, html: {multipart: true} do |t|%>
 <div class="field">
 <p>Pose name:<%=t.text_field :name, required: true%></p>
