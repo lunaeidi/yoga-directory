@@ -11,13 +11,16 @@
 </ul>
 <br>
 <%if @reviews != "No reviews yet."%>
-<h3>Reviews:</h3>
+<h3 id="Reviews">Reviews:</h3>
 <ul>
 <%@reviews.each do |review|%>
 
 <li><%=review.user.username%> says <%=review.content%><li>
    </ul>
 <%end%>
+
+<ul id="review">
+</ul>
 
 
 <%else%>
@@ -37,13 +40,13 @@
 <%end%>
 <br><br>
 
-  <ul id="review">
-  </ul>
+
 
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('form').submit(function(event) {
-        event.preventDefault();
+
+      event.preventDefault();
         function Review(username, content) {
           this.username = username;
           this.content = content;
@@ -52,21 +55,20 @@
             return `${this.username} says ${this.content} `
         }
 
-
-
 //THIS is a node list wich has this[2]= textarea (and that has innerHTML and innerTEXT as "") and this[4]= user_id
 
-      var id = parseInt($(".js-next").attr("data-id"))
+  var id = parseInt($(".js-next").attr("data-id"))
 
       var posting = $.post('/reviews', $(this).serialize());
 
       posting.done(function(data) {
 
        var post = data;
+      // debugger
       //  var reviewText= "<li>" + post["user_id"] + " says " + post["content"] + "</li>" //need a way to turn this into username....
       //  $("#review").html(reviewText)
 
-
+//post["username(data["id"])"]
        var review2 = new Review(post["user_id"], post["content"]); // how to get username?
           $("#review").html(review2.postReview())  //with both of the 2 methods, at first page says "1 says..."
           //then changes when refreshed.
@@ -94,8 +96,10 @@
 $(function () {
   $(".js-next").on("click", function() {
     var nextId = parseInt($(".js-next").attr("data-id"))// + 1
-        $.getJSON("/poses/" + Id + "/next.json", function(data) { //data.id
-
+        $.getJSON("/poses/" + nextId + "/next.json", function(data) { //data.id
+          debugger
+          $(form)
+          //data["id"]
       //$(".poseCategories").text(data["categories"]);
       $(".poseName").text(data["name"]);
       $(".poseContent").text(data["content"]);
