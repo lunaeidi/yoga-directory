@@ -1,0 +1,16 @@
+<%if @reviews != "No reviews yet."%>
+<h3 id="Reviews">Reviews:</h3>
+<ul>
+<%@reviews.each do |review|%>
+
+<li><%=review.user.username%> says <%=review.content%><li>
+   </ul>
+<%end%>
+
+<ul id="review">
+</ul>
+
+
+<%else%>
+<p><%=@reviews%></p>
+<%end%>

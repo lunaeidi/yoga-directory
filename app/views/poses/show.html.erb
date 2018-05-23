@@ -10,25 +10,10 @@
 <%end%> </div>
 </ul>
 <br>
-<%if @reviews != "No reviews yet."%>
-<h3 id="Reviews">Reviews:</h3>
-<ul>
-<%@reviews.each do |review|%>
-
-<li><%=review.user.username%> says <%=review.content%><li>
-   </ul>
-<%end%>
-
+<button class="loadReviews" data-id="<%@pose.id%>">Load Reviews</button>
 <ul id="review">
 </ul>
 
-
-<%else%>
-<p><%=@reviews%></p>
-<%end%>
-<%if !logged_in?%>
-<p><%=link_to "Log In",controller:'sessions',action:'new'%> or <%=link_to "sign up",controller:'users',action:'new'%> to write a review!</p>
-<%end%>
 
 <%if logged_in?%>
 <h1>Write a review</h1>
@@ -40,13 +25,21 @@
 <%end%>
 <br><br>
 
+<script type="text/javascript" charset="utf-8"> //load reviews
+  $(function () {
+    $("button").on("click", function() {
+      var poseid = $(this).data("id");
+      $.get("/poses/" + poseid + ".json", function(data) {
+        var reviews= data["reviews"]
+        reviews.forEach(review,function(){
 
+        })
 
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('form').submit(function(event) {
 
-      event.preventDefault();
+      //event.preventDefault();
         function Review(username, content) {
           this.username = username;
           this.content = content;
@@ -69,7 +62,7 @@
       //  $("#review").html(reviewText)
 
 //post["username(data["id"])"]
-       var review2 = new Review(post["user_id"], post["content"]); // how to get username?
+       var review2 = new Review(post["username(1)"], post["content"]); // how to get username?
           $("#review").html(review2.postReview())  //with both of the 2 methods, at first page says "1 says..."
           //then changes when refreshed.
 
@@ -95,10 +88,11 @@
 <script type="text/javascript" charset="utf-8">
 $(function () {
   $(".js-next").on("click", function() {
-    var nextId = parseInt($(".js-next").attr("data-id"))// + 1
+    var Id= parseInt($(".js-next").attr("data-id"))
+    var nextId = parseInt($(".js-next").attr("data-id")) + 1
         $.getJSON("/poses/" + nextId + "/next.json", function(data) { //data.id
           debugger
-          $(form)
+          $(".review_pose_id").val("Id")
           //data["id"]
       //$(".poseCategories").text(data["categories"]);
       $(".poseName").text(data["name"]);
