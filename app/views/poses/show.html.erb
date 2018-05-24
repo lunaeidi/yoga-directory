@@ -32,9 +32,10 @@
         $.get("/poses/" + poseid + ".json", function(data) {
         var reviews= data["reviews"]
 
-        reviews.forEach(function(review){
-          $('.review').append("<li>"+review["user_id"] + " says " + review["content"]+"</li>") //change to username after
-debugger
+        reviews.forEach(function(review){ //only last one shows
+
+          $('#review').append("<li>"+review["user_id"] + " says " + review["content"]+"</li>") //change to username after
+
         })
       })
     })
@@ -45,7 +46,7 @@ debugger
   $(function () {
     $('form').submit(function(event) {
 
-      //event.preventDefault(); need to fix argument error from username method 
+      //event.preventDefault(); need to fix argument error from username method
         function Review(username, content) {
           this.username = username;
           this.content = content;
@@ -113,7 +114,7 @@ $(function () {
       categories.forEach(function(category){
         categoryNames+= category["name"]
       })
-      $(".poseCategories").text(categoryNames) //or html? but didnt put any html tags
+      $(".poseCategories").text(categoryNames)
 
       if (data["reviews"].length > 0){
              var reviews = data["reviews"];
@@ -122,10 +123,11 @@ $(function () {
 
                reviewContents += review["content"]
              });
-             //$("#product-" + id + "-orders").text(reviewContents); //what is this line doing...
+
            }
         $(".js-next").attr("data-id", data["id"]);
-
+        //pauses on poses/4 page with debugger here
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Read-only
     });
   });
 });
