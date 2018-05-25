@@ -30,7 +30,7 @@
 <script type="text/javascript" charset="utf-8"> //load reviews
   $(function () {
     $("button").on("click", function() {
-      var poseid = $(this).data("id");
+      var poseid = $(this).data("id"); //here is where the data-id goes to the pose-id to load reviews.. where problem could be?
         $.get("/poses/" + poseid + ".json", function(data) {
         var reviews= data["reviews"]
 
@@ -48,7 +48,7 @@
   $(function () {
     $('form').submit(function(event) {
 
-      event.preventDefault();// need to fix argument error from username method
+      event.preventDefault();
         function Review(username, content) {
           this.username = username;
           this.content = content;
@@ -96,7 +96,7 @@
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
-  $(".js-next").on("click", function(e) {
+  $(".js-next").on("click", function(e) { //next button
     e.preventDefault()
     var Id= parseInt($(".js-next").attr("data-id"))
     var nextId = parseInt($(".js-next").attr("data-id")) + 1
@@ -104,8 +104,9 @@ $(function () {
 
         var form_field=  $("#review_pose_id")
         form_field.val(nextId)
+        $("#load-review").text("")//clear reviews
         $("button").attr("data-id", data["id"])
-
+debugger
           //data["id"]
 
       $(".poseName").text(data["name"]);
