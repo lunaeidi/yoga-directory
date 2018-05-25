@@ -11,6 +11,8 @@
 </ul>
 <br>
 <button class="loadReviews" data-id="<%=@pose.id%>">Load Reviews</button>
+<ul id="load-review">
+</ul>
 <ul id="review">
 </ul>
 
@@ -34,7 +36,7 @@
 
         reviews.forEach(function(review){ //only last one shows
 
-          $('#review').append("<li>"+review["user_id"] + " says " + review["content"]+"</li>") //change to username after
+          $('#load-review').append("<li>"+review["username"] + " says " + review["content"]+"</li>") //change to username after
 
         })
       })
@@ -70,7 +72,7 @@
 
 //post["username(data["id"])"]
        var review2 = new Review(post["username"], post["content"]); // how to get username?
-          $("#review").html(review2.postReview())  //with both of the 2 methods, at first page says "1 says..."
+          $("#review").html("<li>"+ review2.postReview() + "</li>")  //with both of the 2 methods, at first page says "1 says..."
           //then changes when refreshed.
 
       });
