@@ -30,13 +30,14 @@
 <script type="text/javascript" charset="utf-8"> //load reviews
   $(function () {
     $("button").on("click", function() {
-      var poseid = $(this).data("id"); //here is where the data-id goes to the pose-id to load reviews.. where problem could be?
+      var poseid = $(this).data("id"); //here pose-id is stll 3 in debugger ...
+      debugger
         $.get("/poses/" + poseid + ".json", function(data) {
         var reviews= data["reviews"]
 
-        reviews.forEach(function(review){ //only last one shows
+        reviews.forEach(function(review){
 
-          $('#load-review').append("<li>"+review["username"] + " says " + review["content"]+"</li>") //change to username after
+          $('#load-review').append("<li>"+review["username"] + " says " + review["content"]+"</li>")
 
         })
       })
@@ -64,7 +65,7 @@
       var posting = $.post('/reviews', $(this).serialize());
 
       posting.done(function(data) {
-
+        $("#review_content").val("")
        var post = data;
       // debugger
       //  var reviewText= "<li>" + post["user_id"] + " says " + post["content"] + "</li>" //need a way to turn this into username....
@@ -104,8 +105,9 @@ $(function () {
 
         var form_field=  $("#review_pose_id")
         form_field.val(nextId)
-        $("#load-review").text("")//clear reviews
-        $("button").attr("data-id", data["id"])
+        $("#load-review").html("")
+        $("#review").html("")
+        $("button").attr("data-id", data["id"]) //here, I am changing the value to 4.... 
 debugger
           //data["id"]
 
