@@ -46,7 +46,7 @@
   $(function () {
     $('form').submit(function(event) {
 
-      //event.preventDefault(); need to fix argument error from username method
+      event.preventDefault();// need to fix argument error from username method
         function Review(username, content) {
           this.username = username;
           this.content = content;
@@ -94,13 +94,15 @@
 
 <script type="text/javascript" charset="utf-8">
 $(function () {
-  $(".js-next").on("click", function() {
+  $(".js-next").on("click", function(e) {
+    e.preventDefault()
     var Id= parseInt($(".js-next").attr("data-id"))
     var nextId = parseInt($(".js-next").attr("data-id")) + 1
         $.getJSON("/poses/" + nextId + ".json", function(data) { //data.id
+          // $.getJSON("/poses/" + Id + "/next.json", function(data) {
 
-        var form_field=  $(".review_pose_id")
-        form_field.val("Id")
+        var form_field=  $("#review_pose_id")
+        form_field.val("nextId")
 
           //data["id"]
 
@@ -126,7 +128,7 @@ $(function () {
 
            }
         $(".js-next").attr("data-id", data["id"]);
-        //pauses on poses/4 page with debugger here
+      //  debugger //pauses on poses/4 page with debugger here
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Read-only
     });
   });
