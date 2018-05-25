@@ -14,3 +14,12 @@
 <%else%>
 <p><%=@reviews%></p>
 <%end%>
+
+
+<%@user.poses.each do |pose|%>
+<%= image_tag pose.image.url(:thumb) %>
+<br>
+<%=link_to pose.name, pose_path(pose)%> - <%=pose.level.level%>
+<br><br>
+
+<%end%>
