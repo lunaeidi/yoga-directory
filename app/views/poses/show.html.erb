@@ -101,10 +101,9 @@ $(function () {
     var Id= parseInt($(".js-next").attr("data-id"))
     var nextId = parseInt($(".js-next").attr("data-id")) + 1
         $.getJSON("/poses/" + nextId + ".json", function(data) { //data.id
-          // $.getJSON("/poses/" + Id + "/next.json", function(data) {
 
         var form_field=  $("#review_pose_id")
-        form_field.val("nextId")
+        form_field.val(nextId)
 
           //data["id"]
 
