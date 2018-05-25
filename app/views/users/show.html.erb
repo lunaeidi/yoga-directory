@@ -19,12 +19,14 @@ $(function() {
     var poses= data["poses"];
     var poseDetails=""
     poses.forEach(function(pose){
-      pose["name"]
-      pose["image"]
-      pose["level"]["level"]
+
       var pic= pose["image"]
       $(".poses").append('<img src="'+ pic +'">')
       $(".poses").append("<p>"+ pose["name"] + ' - '+ pose["level"]["level"] + "</p>"+"<br>")
+      //$(".poses").append("<p>"+ "<a href='/poses/' + pose["id"] + ''>pose["name"]</a>" + ' - '+ pose["level"]["level"] + "</p>"+"<br>")
+      //do we want plus signs around pose["name"] just like we had in the img tag ?
+      //which link does it go to? do we want plus signs here as well ? will need to interpolate pose["id"] from data
+      //look at stackoverflow answer in jquery folder 
     })
     });
   });
