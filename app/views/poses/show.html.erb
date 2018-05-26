@@ -30,8 +30,7 @@
 <script type="text/javascript" charset="utf-8"> //load reviews
   $(function () {
     $("button").on("click", function() {
-      var poseid = $(this).data("id"); //here pose-id is stll 3 in debugger ...
-      debugger
+      var poseid = $(this).attr("data-id"); //here pose-id is stll 3 in debugger ... but is 4 if haven't loaded previous comments
         $.get("/poses/" + poseid + ".json", function(data) {
         var reviews= data["reviews"]
 
@@ -50,6 +49,7 @@
     $('form').submit(function(event) {
 
       event.preventDefault();
+      event.stopPropagation()
         function Review(username, content) {
           this.username = username;
           this.content = content;
@@ -71,10 +71,10 @@
       //  var reviewText= "<li>" + post["user_id"] + " says " + post["content"] + "</li>" //need a way to turn this into username....
       //  $("#review").html(reviewText)
 
-//post["username(data["id"])"]
-       var review2 = new Review(post["username"], post["content"]); // how to get username?
-          $("#review").html("<li>"+ review2.postReview() + "</li>")  //with both of the 2 methods, at first page says "1 says..."
-          //then changes when refreshed.
+
+       var review2 = new Review(post["username"], post["content"]);
+          $("#review").html("<li>"+ review2.postReview() + "</li>")
+
 
       });
     });
@@ -101,14 +101,14 @@ $(function () {
     e.preventDefault()
     var Id= parseInt($(".js-next").attr("data-id"))
     var nextId = parseInt($(".js-next").attr("data-id")) + 1
-        $.getJSON("/poses/" + nextId + ".json", function(data) { //data.id
+        $.getJSON("/poses/" + nextId + ".json", function(data) {
 
         var form_field=  $("#review_pose_id")
         form_field.val(nextId)
         $("#load-review").html("")
         $("#review").html("")
-        $("button").attr("data-id", data["id"]) //here, I am changing the value to 4.... 
-debugger
+        $("button").attr("data-id", data["id"]) //here, I am changing the value to 4....
+
           //data["id"]
 
       $(".poseName").text(data["name"]);
