@@ -15,4 +15,8 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require categories
+//= require poses
+//= require reviews
+//= require users 
 //= require_tree .

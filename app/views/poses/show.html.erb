@@ -27,59 +27,7 @@
 <%end%>
 <br><br>
 
-<script type="text/javascript" charset="utf-8"> //load reviews
-  $(function () {
-    $("button").on("click", function() {
-      var poseid = $(this).attr("data-id"); //here pose-id is stll 3 in debugger ... but is 4 if haven't loaded previous comments
-        $.get("/poses/" + poseid + ".json", function(data) {
-        var reviews= data["reviews"]
 
-        reviews.forEach(function(review){
-
-          $('#load-review').append("<li>"+review["username"] + " says " + review["content"]+"</li>")
-
-        })
-      })
-    })
-  })
-  </script>
-
-<script type="text/javascript" charset="utf-8">
-  $(function () {
-    $('form').submit(function(event) {
-
-      event.preventDefault();
-      event.stopPropagation()
-        function Review(username, content) {
-          this.username = username;
-          this.content = content;
-        }
-        Review.prototype.postReview = function() {
-            return `${this.username} says ${this.content} `
-        }
-
-//THIS is a node list wich has this[2]= textarea (and that has innerHTML and innerTEXT as "") and this[4]= user_id
-
-  var id = parseInt($(".js-next").attr("data-id"))
-
-      var posting = $.post('/reviews', $(this).serialize());
-
-      posting.done(function(data) {
-        $("#review_content").val("")
-       var post = data;
-      // debugger
-      //  var reviewText= "<li>" + post["user_id"] + " says " + post["content"] + "</li>" //need a way to turn this into username....
-      //  $("#review").html(reviewText)
-
-
-       var review2 = new Review(post["username"], post["content"]);
-          $("#review").html("<li>"+ review2.postReview() + "</li>")
-
-
-      });
-    });
-  });
-</script>
 
 
 <%if current_user.id == @pose.user_id%>
@@ -93,49 +41,3 @@
 <%end%>
 
 <a href="/poses">Go back to all poses</a>
-
-
-<script type="text/javascript" charset="utf-8">
-$(function () {
-  $(".js-next").on("click", function(e) { //next button
-    e.preventDefault()
-    var Id= parseInt($(".js-next").attr("data-id"))
-    var nextId = parseInt($(".js-next").attr("data-id")) + 1
-        $.getJSON("/poses/" + nextId + ".json", function(data) {
-
-        var form_field=  $("#review_pose_id")
-        form_field.val(nextId)
-        $("#load-review").html("")
-        $("#review").html("")
-        $("button").attr("data-id", data["id"]) //here, I am changing the value to 4....
-
-          //data["id"]
-
-      $(".poseName").text(data["name"]);
-      $(".poseContent").text(data["content"]);
-
-      var pic= data["image"]
-      $(".poseImage").html('<img src="'+ pic +'">')
-      var categories= data["categories"]
-      categoryNames=''
-      categories.forEach(function(category){
-        categoryNames+= category["name"]
-      })
-      $(".poseCategories").text(categoryNames)
-
-      if (data["reviews"].length > 0){
-             var reviews = data["reviews"];
-             var reviewContents = "";
-             reviews.forEach(function(review) { //need to make the post review form work too here !
-
-               reviewContents += review["content"]
-             });
-
-           }
-        $(".js-next").attr("data-id", data["id"]);
-      //  debugger //pauses on poses/4 page with debugger here
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Read-only
-    });
-  });
-});
-</script>
