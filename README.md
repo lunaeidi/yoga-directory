@@ -8,7 +8,7 @@ This is a web app that is simply accessible by visiting the website.
 
 Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/nicoleeidi/room-rental-sinatra-app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/nicoleeidi/rails-app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
 License
 
