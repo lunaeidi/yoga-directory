@@ -3,11 +3,33 @@
   $(function () {
     $("button").on("click", function() {
       let poseid = $(this).attr("data-id");
-        $.get("/poses/" + poseid + ".json", function(data) {
+        $.get(`/poses/${poseid}.json`, function(data) {
         let reviews= data["reviews"]
 
+        // sort by name
+      let sorted=  reviews.sort(function(a, b) {
+          var contentA = a["content"].toUpperCase(); // ignore upper and lowercase
+          var contentB = b["content"].toUpperCase(); // ignore upper and lowercase
+          if (contentA < contentB) {
+            return -1;
+          }
+          if (contentA > contentB) {
+            return 1;
+          }
+
+          // names must be equal
+          return 0;
+        });
+
+      // let sorted=  reviews.sort(function(a,b){
+      //     return a["content"] - b["content"]
+      //   })
+
+
+
+
         //reviews.forEach(function(review){
-        reviews.forEach((review)=>{
+        sorted.forEach((review)=>{
 
           $('#load-review').append("<li>"+review["username"] + " says " + review["content"]+"</li>")
 
