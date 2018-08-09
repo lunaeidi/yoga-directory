@@ -1,7 +1,7 @@
 
 
   $(function () {
-    $("button").on("click", function() {
+    $(".loadReviews").on("click", function() {
       let poseid = $(this).attr("data-id");
         $.get(`/poses/${poseid}.json`, function(data) {
         let reviews= data["reviews"]
@@ -41,7 +41,7 @@
 
 
   $(function () {
-    $('form').submit(function(event) {
+    $('.reviewform').submit(function(event) {
 
       event.preventDefault();
       event.stopPropagation()

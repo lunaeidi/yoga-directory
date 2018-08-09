@@ -1,8 +1,12 @@
-<h1>Welcome to the Yoga poses directory!</h1>
+<div style="display: flex; justify-content: center; align-items: center;"><h1 style="font-family:"Fantasy";">Yoga Directory</h1><div style="display:flex; flex-direction: column;justify-content: space-around; align-items: center;position:absolute; width:30vw; height:40vh; top: 30vh; left: 35vw; background:#85CEEB;"><h2>Welcome</h2>
 
-<%=link_to 'Sign up', controller:'users', action:'new'%> or <%=link_to "Log in", controller:'sessions',action:'new'%>
-to add to the directory.
+<div><%=link_to 'Sign up', controller:'users', action:'new'%> or <%=link_to "Log in", controller:'sessions',action:'new'%>
+to add to the directory.</div>
 <br><br>
-  Click here to <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+  <div> <%= link_to(image_tag("https://scontent-iad3-1.xx.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=0&oh=330a9d126c095d09d8766dd2428c7dbf&oe=5BC667EA",:size => '7x1s',:class => "img_preview"), '/auth/facebook') %></div>
 <br><br>
-<%=link_to 'View Poses', poses_path%>
+<div><%=link_to 'View Poses', poses_path%></div></div></div>
+<style>
+.img_preview {width: 210px;
+height: 30px;}
+</style>

@@ -19,7 +19,7 @@
 
 <%if logged_in?%>
 <h1>Write a review</h1>
-<%=form_for @review do |f|%>
+<%=form_for(@review, :html => {:class => "reviewform"}) do |f|%>
 <%=f.text_area :content%>
 <%=f.hidden_field :pose_id, value:@pose.id%>
 <%=f.hidden_field :user_id, value:current_user.id%>
