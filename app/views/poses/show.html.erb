@@ -1,14 +1,47 @@
-<a href="#" class="js-next" data-id="<%=@pose.id%>">Next Pose</a>
+<style>
+.imageContainer:{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.next {
+  width:5vw;
+  height: 5vh;
+  float: right;
+}
+.poseImage{
+  border: 3px solid blue; width: 60vw;
+  margin: 0 auto;
+}
+.category1{
+border: 1px solid blue;
+background: #EEE;
+padding: 5px;
+border-radius: 8px;
+}
+.hi{
+  border: 1px solid blue; width: 60vw; background: #C0C0C0;
+}
+.poseCategories{
+  display: inline;
+}
+.poseName{
+  display: inline;
+}
+</style>
+<div class='imageContainer'>
+<a href="#" class="js-next" data-id="<%=@pose.id%>"><svg aria-hidden="true" data-prefix="fas" data-icon="arrow-right" class="next svg-inline--fa fa-arrow-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg></a>
 <div class="poseImage"><%= image_tag @pose.image.url %></div>
-
+</div>
 <h1 class="poseName"><%=@pose.name%></h1>
-<h3 class="poseContent"><%=@pose.content%></h3>
-<ul>
-<div class="poseCategories">  <h3>Categories:</h3>
+
+<div class="poseCategories">
 <%@pose.categories.each do |category|%>
-<li><%=category.name%> </li>
+<span class="category1"><%=category.name%></span>
 <%end%> </div>
-</ul>
+
+<h3 class="poseContent"><%=@pose.content%></h3>
+
 <br>
 <button class="loadReviews" data-id="<%=@pose.id%>">Load Reviews</button>
 <ul id="load-review">
@@ -49,6 +82,51 @@
 <script>
 
 
+$(function () {
+  $(".js-next").on("click", function(e) {
+    e.preventDefault()
+    let Id= parseInt($(".js-next").attr("data-id"))
+    let nextId = parseInt($(".js-next").attr("data-id")) + 1
+        $.getJSON("/poses/" + nextId + ".json", function(data) {
+
+        let form_field=  $("#review_pose_id")
+        form_field.val(nextId)
+        $("#load-review").html("")
+        $("#review").html("")
+        $("button").attr("data-id", data["id"])
+
+
+
+      $(".poseName").text(data["name"]);
+      $(".poseContent").text(data["content"]);
+
+      let pic= data["image"]
+      $(".poseImage").html('<img src="'+ pic +'">')
+      let categories= data["categories"]
+      categoryNames=''
+      categories.forEach((category)=>{
+      //categories.forEach(function(category){
+        categoryNames+= category["name"]
+      })
+      $(".poseCategories").text(categoryNames) //just addng them to poseCategories here
+
+      if (data["reviews"].length > 0){
+             let reviews = data["reviews"];
+             let reviewContents = "";
+             //reviews.forEach(function(review) {
+             reviews.forEach((review)=>{
+
+               reviewContents += review["content"]
+             });
+
+           }
+        $(".js-next").attr("data-id", data["id"]);
+
+    });
+  });
+});
+
+
   $(function () {
     $(".loadReviews").on("click", function() {
       console.log("A")
@@ -74,7 +152,7 @@
         sorted.forEach((review)=>{
           console.log("B")
 
-          $('#load-review').append("<li>"+review["username"] + " says " + review["content"]+"</li>")
+          $('#load-review').append('<li class="hi">'+review["username"] + " says " + review["content"]+"</li>")
 
         })
       })
