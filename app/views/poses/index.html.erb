@@ -5,13 +5,13 @@
 <h2>Hi, you are logged in as <%=@user.username%></h2>
 <br>
  <%if @poses == Pose.all%>
-<%=link_to "Create New Pose", new_pose_path%>
+<span style="float:right;"><%=button_to "Create New Pose", new_pose_path, :method=>"get"%></span>
   <%end%>
 <%else%>
 <p><%=link_to "Log in", controller:'sessions',action:'new'%> or <%=link_to "sign up",controller:'users',action:'new'%> to list a pose </p>
 <%end%>
 
-<%if @poses == Pose.all%>  
+<%if @poses == Pose.all%>
 <div>
   <h3>Filter poses by:</h3>
   <%= form_tag("/poses", method: "get") do %>

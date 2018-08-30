@@ -79,14 +79,17 @@ end
 
   def show
       if @pose.reviews.empty?
-        @reviews= "No reviews yet."
+          @reviews= "No reviews yet."
     else
         @reviews= @pose.reviews
     end
-      @review= Review.new
+    #  binding.pry
+   if logged_in?
+     @review= Review.new #this line could be messing it up, commenting out didnt make difference
+    end
       respond_to do |format|
   format.html { render :show }
-  format.json { render json: @pose} 
+  format.json { render json: @pose} #this comes in the error log
 end
        #render json: @pose, status: 200 #the .json worked when it was just this
     end
