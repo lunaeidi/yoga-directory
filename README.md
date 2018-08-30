@@ -5,9 +5,13 @@ This is a directory of yoga poses, sorted by categories and level. Create an acc
 Install Instructions
 
 git clone https://github.com/nicoleeidi/rails-app.git
+
 cd rails-app
+
 bundle install
+
 rake db:migrate
+
 rails s
 
 Contributing
