@@ -11,10 +11,10 @@
 
   <body>
     <div class="navbar">
-   <a >My Poses</a>
-   <a >All Poses</a>
+   <a href="/users/<%=session[:user_id]%>" >My Poses</a>
+   <a href="/poses">All Poses</a>
    <div class="dropdown">
-     <button class="dropbtn">Dropdown
+     <button class="dropbtn">Levels
        <i class="fa fa-caret-down"></i>
      </button>
      <div class="dropdown-content">

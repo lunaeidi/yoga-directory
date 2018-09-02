@@ -80,11 +80,12 @@ display: inline;
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit"value="delete">
 </form>
-<p><%=link_to "Edit Listing", edit_pose_path(@pose)%></p>
+<!--<p><%=link_to "Edit Listing", edit_pose_path(@pose)%></p>-->
+<p><%=button_to "Edit", edit_pose_path(@pose), method: :get%></p>
 <%end%>
 <%end%>
 
-<a href="/poses">Go back to all poses</a>
+<!--<a href="/poses">Go back to all poses</a>-->
 <style>
 
 </style>
@@ -196,7 +197,7 @@ console.log("C")
 
 
        let review2 = new Review(post["username"], post["content"]);
-          $("#review").html("<li>"+ review2.postReview() + "</li>")
+          $("#review").html("<li class='hi'>"+ review2.postReview() + "</li>")
 
 
       });

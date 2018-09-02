@@ -51,6 +51,10 @@ end
   end
 end
   def index
+    if !logged_in?
+    flash[:error]= "You must be logged in to do that."
+    return redirect_to controller:'sessions', action:'new'
+  end
       if session[:user_id]
       @user= User.find(session[:user_id])
     end
@@ -78,6 +82,10 @@ end
 end
 
   def show
+    if !logged_in?
+    flash[:error]= "You must be logged in to do that."
+    return redirect_to controller:'sessions', action:'new'
+  end
       if @pose.reviews.empty?
           @reviews= "No reviews yet."
     else
