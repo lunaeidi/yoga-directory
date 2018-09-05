@@ -1,17 +1,17 @@
 <h1><%=@user.username%>'s Poses</h1>
 
- <button class="load-poses" data-id="<%= @user.id %>">Load Poses</button></br>
+ <!--<button class="load-poses" data-id="<%= @user.id %>">Load Poses</button></br>-->
 
 <div class="poses">
-  <!-- <%@user.poses.each do |pose|%>
-  <%binding.pry%>
-  <p><%=pose.name%></p> -->
-  <!-- <img src=<%="#{pose.image_file_name}"%>> -->
-  <!-- let pic= pose["image"]
-  $(".poses").append('<img src="'+ pic +'">') -->
+  <%@user.poses.each do |pose|%>
+  <%= image_tag pose.image.url(:thumb) %>
+  <h2><%=link_to pose.name,pose_path(pose)%></h2>
+  <h4><%=pose.level.level%></h4>
+  <br>
+  <%end%>
 
 </div>
-<script>
+<!-- <script>
 
 $(function() {
   $(".load-poses").on("click", function() {
@@ -34,4 +34,4 @@ poses.forEach((pose)=>{
   });
 });
 
-</script>
+</script> -->
