@@ -9,6 +9,17 @@
   height: 5vh;
   float: right;
 }
+#delete{
+  float: left;
+  margin-right: 3px;
+}
+.edit{
+  /* position: relative; */
+  float: left;
+  display: inline;
+/* margin-top: 20px;
+margin-right: 20px; */
+}
 .poseImage{
 /* height can be modified but it doesnt actually move the pic down, just moves the blue box up */
 /*  need to change the pic itself, make it smaller or remove whit spce. */
@@ -18,10 +29,10 @@ align-items:center;
 justify-content:center;
 width:20vw;
 height:20vw;
-  border: 3px solid blue; width: 60vw;
+  border: 3px solid #85CEEB;
   margin: 0 auto;
 }
-/* when take out 60vw width, it actually makes the pic smaller ! */
+/* when take out 60vw width from line with border, it actually makes the pic smaller ! */
 .new_img{
 
 }
@@ -49,11 +60,19 @@ display: inline;
 }
 </style>
 <div class='imageContainer'>
+  <%if current_user.id == @pose.user_id%>
+  <form id="delete"method="post"action="/poses/<%=@pose.id%>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit"value="Delete">
+  </form>
+  <p class="edit"><%=button_to "Edit", edit_pose_path(@pose), method: :get%></p>
+  <%end%>
 <a href="#" class="js-next" data-id="<%=@pose.id%>"><svg aria-hidden="true" data-prefix="fas" data-icon="arrow-right" class="next svg-inline--fa fa-arrow-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg></a>
 <div class="poseImage"><%= image_tag(@pose.image.url)%></div>
 <!--<img class=".new_img" src="<%=@pose.image.url%>">-->
 <!-- , width: '300' -->
-
+<!--or put edit button here-->
 </div>
 <div class="poseNameContainer">
 <h1 class="poseName"><%=@pose.name%></h1>
@@ -65,7 +84,6 @@ display: inline;
 </div>
 
 <p class="poseContent"><%=@pose.content%></p>
-
 <br>
 <button class="loadReviews" data-id="<%=@pose.id%>">Load Reviews</button>
 <ul id="load-review">
@@ -89,16 +107,16 @@ display: inline;
 
 
 
-<%if current_user.id == @pose.user_id%>
+<!-- <%if current_user.id == @pose.user_id%>
 <form method="post"action="/poses/<%=@pose.id%>">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit"value="delete">
-</form>
+</form> -->
 <!--<p><%=link_to "Edit Listing", edit_pose_path(@pose)%></p>-->
-<p><%=button_to "Edit", edit_pose_path(@pose), method: :get%></p>
-<%end%>
-<%end%>
+<!-- <p class="edit"><%=button_to "Edit", edit_pose_path(@pose), method: :get%></p> -->
+<!-- <%end%>
+<%end%> -->
 
 <!--<a href="/poses">Go back to all poses</a>-->
 <style>
