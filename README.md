@@ -1,10 +1,18 @@
 # rails-app
 
-This is a directory of yoga poses, sorted by categories and level. You can add entries of poses to the site (by creating an account), and view the poses posted by others.
+This is a directory of yoga poses, sorted by categories and level. Create an account to  add entries of poses to the site and view the poses posted by others.
 
 Install Instructions
 
-This is a web app that is simply accessible by visiting the website.
+git clone https://github.com/nicoleeidi/rails-app.git
+
+cd rails-app
+
+bundle install
+
+rake db:migrate
+
+rails s
 
 Contributing
 
