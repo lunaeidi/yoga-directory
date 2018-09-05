@@ -1,8 +1,8 @@
 <style>
 .imageContainer:{
-  display:flex;
+  /* display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:center; */
 }
 .next {
   width:5vw;
@@ -10,8 +10,20 @@
   float: right;
 }
 .poseImage{
+/* height can be modified but it doesnt actually move the pic down, just moves the blue box up */
+/*  need to change the pic itself, make it smaller or remove whit spce. */
+/* made it flexbox so it can resize the pic automatically */
+ display:flex;
+align-items:center;
+justify-content:center;
+width:20vw;
+height:20vw;
   border: 3px solid blue; width: 60vw;
   margin: 0 auto;
+}
+/* when take out 60vw width, it actually makes the pic smaller ! */
+.new_img{
+
 }
 .category1{
 border: 1px solid blue;
@@ -38,7 +50,10 @@ display: inline;
 </style>
 <div class='imageContainer'>
 <a href="#" class="js-next" data-id="<%=@pose.id%>"><svg aria-hidden="true" data-prefix="fas" data-icon="arrow-right" class="next svg-inline--fa fa-arrow-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg></a>
-<div class="poseImage"><%= image_tag @pose.image.url %></div>
+<div class="poseImage"><%= image_tag(@pose.image.url)%></div>
+<!--<img class=".new_img" src="<%=@pose.image.url%>">-->
+<!-- , width: '300' -->
+
 </div>
 <div class="poseNameContainer">
 <h1 class="poseName"><%=@pose.name%></h1>
@@ -49,7 +64,7 @@ display: inline;
 <%end%> </div>
 </div>
 
-<h3 class="poseContent"><%=@pose.content%></h3>
+<p class="poseContent"><%=@pose.content%></p>
 
 <br>
 <button class="loadReviews" data-id="<%=@pose.id%>">Load Reviews</button>
@@ -62,7 +77,7 @@ display: inline;
 
 
 <%if logged_in?%>
-<h1>Write a review</h1>
+<h4>Write a review</h4>
 <%=form_for(@review, :html => {:class => "reviewform"}) do |f|%>
 <%=f.text_area :content%>
 <%=f.hidden_field :pose_id, value:@pose.id%>
@@ -139,28 +154,31 @@ $(function () {
 
   $(function () {
     $(".loadReviews").on("click", function() {
+      $('#load-review').text("")
       console.log("A")
       let poseid = $(this).attr("data-id");
         $.get(`/poses/${poseid}.json`, function(data) { //this line is causing trouble
           console.log("B")//doesnt reach
         let reviews= data["reviews"]
-
-        // sort by name
-      let sorted=  reviews.sort(function(a, b) {
-          var contentA = a["content"].toUpperCase(); // ignore upper and lowercase
-          var contentB = b["content"].toUpperCase(); // ignore upper and lowercase
-          if (contentA < contentB) {
-            return -1;
-          }
-          if (contentA > contentB) {
-            return 1;
-          }
-
-          return 0;
-        });
-
+          //   // sort by name
+      // let sorted=  reviews.sort(function(a, b) {
+      //     var contentA = a["content"].toUpperCase(); // ignore upper and lowercase
+      //     var contentB = b["content"].toUpperCase(); // ignore upper and lowercase
+      //     if (contentA < contentB) {
+      //       return -1;
+      //     }
+      //     if (contentA > contentB) {
+      //       return 1;
+      //     }
+      //
+      //     return 0;
+      //   });
+      if (reviews.length === 0){
+      //  debugger
+    $('#load-review').text("There are no reviews yet.")  }
         //reviews.forEach(function(review){
-        sorted.forEach((review)=>{
+        reviews.forEach((review)=>{
+        //  debugger
           console.log("B")
 
           $('#load-review').append('<li class="hi">'+review["username"] + " says " + review["content"]+"</li>")
@@ -194,7 +212,9 @@ console.log("C")
         $("#review_content").val("")
        let post = data;
 
-
+if (document.getElementById('load-review').innerHTML= "There are no reviews yet."){
+ document.getElementById('load-review').innerHTML= " "
+}
 
        let review2 = new Review(post["username"], post["content"]);
           $("#review").html("<li class='hi'>"+ review2.postReview() + "</li>")
