@@ -27,7 +27,7 @@ test:
   #database: postgresql-deep-23924
 production:
   <<: *default
-  database: myapp_production
+  database: druh57qkg0889
   username: uadanchvoqszmw
   password: 6535f7a485504a326a2d59c06e595a085623869f73b31bd0e6ad5186574f8696
   host: ec2-75-101-153-56.compute-1.amazonaws.com
