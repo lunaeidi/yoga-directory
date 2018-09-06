@@ -40,10 +40,15 @@ document.getElementById("log").submit()
  }
  </script>
 
- <form id="log"action="/logout" method="POST">
+
+ <!-- <form id="log"action="/logout" method="POST">
    <input name="authenticity_token" value="DqNKIONYpsLkVGsKZ8OYADut0U+O2aaijkMeCep+GF+fLljq//twJ8zsE/uUxNhDKtc1D6B9VYEzmCW334fxCQ==" type="hidden">
-   <!--<input type=submit value='logout'>-->
- </form>
+   <input type=submit value='logout'>
+ </form> -->
+ <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}, :id => 'log') do %>
+  <input type=submit value='logout'>
+
+<% end %>
 <style>
 .navbar {
  overflow: hidden;
