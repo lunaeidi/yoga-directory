@@ -151,7 +151,7 @@ $(function () {
       $(".poseContent").text(data["content"]);
 
       let pic= data["image"]
-      $(".poseImage").html('<img src="'+ pic +'">')
+      $(".poseImage").html('<img class="img_new" src="'+ pic +'">')
       let categories= data["categories"]
       categoryNames=''
       categories.forEach((category)=>{
