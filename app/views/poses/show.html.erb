@@ -239,9 +239,9 @@ console.log("C")
         $("#review_content").val("")
        let post = data;
 
-if (document.getElementById('load-review').innerHTML= "There are no reviews yet."){
- document.getElementById('load-review').innerHTML= " "
-}
+// if (document.getElementById('load-review').innerHTML= "There are no reviews yet."){
+//  document.getElementById('load-review').innerHTML= " "
+// }
 
        let review2 = new Review(post["username"], post["content"]);
           $("#review").html("<li class='hi'>"+ review2.postReview() + "</li>")
