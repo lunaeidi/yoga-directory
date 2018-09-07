@@ -24,7 +24,12 @@
      </div>
    </div>
     <%if logged_in?%>
-    <a id="L" onclick="logout()">Logout</a>
+    <a id="L" onclick="logout()">
+      <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+        <input type=submit value='logout'>
+
+     <% end %>
+    </a>
 
     <%else%>
     <%=link_to "Log in", controller:'sessions',action:'new'%>
@@ -45,10 +50,10 @@ document.getElementById("log").submit()
    <input name="authenticity_token" value="DqNKIONYpsLkVGsKZ8OYADut0U+O2aaijkMeCep+GF+fLljq//twJ8zsE/uUxNhDKtc1D6B9VYEzmCW334fxCQ==" type="hidden">
 
  </form> -->
- <%= form_tag ({controller: 'sessions', action: 'destroy'}, method: 'post', id: 'log') do %>
-  <input type=submit value='logout'>
+ <!-- <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+   <input type=submit value='logout'>
 
-<% end %>
+<% end %> -->
 
 
 
