@@ -24,12 +24,12 @@
      </div>
    </div>
     <%if logged_in?%>
-    <a id="L" onclick="logout()">
-      <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-        <input type=submit value='logout'>
+  <a id="L" onclick="logout()">Logout </a>
+      <!-- <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+        <input type=submit value='logout'> -->
 
      <% end %>
-    </a>
+
 
     <%else%>
     <%=link_to "Log in", controller:'sessions',action:'new'%>
@@ -37,14 +37,14 @@
  </div>
  <script>
 
-//why dont we make rails form a normal form post to /logout then add an id
-//strange howw the console.log gets triggered before clicking button
  function logout(){
    console.log("A")
 document.getElementById("log").submit()
  }
  </script>
-
+ <form id="log"action="/logout" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  </form>
 
  <!-- <form id="log"action="/logout" method="POST">
    <input name="authenticity_token" value="DqNKIONYpsLkVGsKZ8OYADut0U+O2aaijkMeCep+GF+fLljq//twJ8zsE/uUxNhDKtc1D6B9VYEzmCW334fxCQ==" type="hidden">
