@@ -1,2 +1,3 @@
-<!--<img class=".new_img" src="<%=@pose.image.url%>">-->
-<!-- , width: '300' -->
+<!-- <%end%> -->
+<!-- <%if current_user.id == @pose.user_id%> -->
+<p class="edit"><%=button_to "Edit", edit_pose_path(@pose), method: :get%></p>
