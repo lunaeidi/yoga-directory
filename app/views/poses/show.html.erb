@@ -68,14 +68,27 @@ display: inline;
 <div class='imageContainer'>
 
 
-  <form id="delete"method="post"action="/poses/<%=@pose.id%>">
+  <!-- <form id="delete"method="post"action="/poses/<%=@pose.id%>">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit"value="Delete">
-  </form>
+  </form> -->
+
+<form class="delete" data-id="<%=@pose.id%>" onsubmit="del()" >
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="submit"value="delete">
+</form>
   <button class="edit"onclick="edit()" data-id="<%=@pose.id%>">Edit</button>
 
   <script>
+  function del(){
+
+  let DI2= parseInt($(".delete").attr("data-id"))
+
+  fetch(`http://localhost:3000/poses/${DI2}`, {
+    method:'delete'
+  })
+}
   function edit(){
   let DI= parseInt($(".edit").attr("data-id")) //ID isnt changing
 
