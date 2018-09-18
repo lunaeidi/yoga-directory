@@ -74,21 +74,33 @@ display: inline;
     <input type="submit"value="Delete">
   </form> -->
 
-<form class="delete" data-id="<%=@pose.id%>" onsubmit="del()" >
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="submit"value="delete">
-</form>
+  <form class="delete" data-id="<%=@pose.id%>" onsubmit="del(); return false" >
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit"value="delete">
+  </form>
   <button class="edit"onclick="edit()" data-id="<%=@pose.id%>">Edit</button>
 
   <script>
-  function del(){
-
+  function del(e){
+    console.log("A")
+  //e.preventDefault() //e is not defined, and still get authenticitytoken error with form...
   let DI2= parseInt($(".delete").attr("data-id"))
-
-  fetch(`http://localhost:3000/poses/${DI2}`, {
-    method:'delete'
+  fetch(`http://localhost:3000/poses/${DI2}`, { // i think it needs a body
+    method:'delete',
+    body: JSON.stringify({id:8}),
+    headers:{
+            'Content-Type': 'application/json'
+                }
   })
+  // .then(response =>
+  //     response.json().then(json => {
+  //     return json;
+  //   })
+  // );
 }
+//its not working because rails requires authenticity tokens with delete requests.....
+//removing then "then" got rid of the JSON bad parse error though
   function edit(){
   let DI= parseInt($(".edit").attr("data-id")) //ID isnt changing
 
