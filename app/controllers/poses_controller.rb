@@ -47,7 +47,8 @@ end
       @pose.delete
       redirect_to poses_path
     else
-      redirect_to poses_path
+          flash[:error]= "You don't have permission to do that."
+          redirect_to poses_path
   end
 end
   def index

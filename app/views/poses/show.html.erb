@@ -67,17 +67,10 @@ display: inline;
 </style>
 <div class='imageContainer'>
 
-
-  <!-- <form id="delete"method="post"action="/poses/<%=@pose.id%>">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit"value="Delete">
-  </form> -->
-
   <form class="delete" data-id="<%=@pose.id%>" onsubmit="del(); return false" >
     <!-- <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <input id="hidden" type="hidden" name="_method" value="delete"> -->
-    <input type="submit"value="delete">
+    <input type="submit"value="Delete">
   </form>
   <button class="edit"onclick="edit()" data-id="<%=@pose.id%>">Edit</button>
 
