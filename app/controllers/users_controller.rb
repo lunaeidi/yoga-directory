@@ -27,7 +27,7 @@ end
 end
 
 def home
-
+render :layout => false
     redirect_to poses_path   if logged_in?
 
     #  @user= User.find(session[:user_id])
