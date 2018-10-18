@@ -10,9 +10,9 @@
   </head>
 
   <body>
-    <!-- <div class="navbar">
+    <div class="navbar">
    <a href="/users/<%=session[:user_id]%>" >My Poses</a>
-  <a href="/poses">All Poses</a>
+   <a href="/poses">All Poses</a>
    <div class="dropdown">
      <button class="dropbtn">Levels
        <i class="fa fa-caret-down"></i>
@@ -24,8 +24,9 @@
      </div>
    </div>
     <%if logged_in?%>
-<a id="L" onclick="logout()">Logout </a>
-
+  <a id="L" onclick="logout()">Logout </a>
+      <!-- <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+        <input type=submit value='logout'> -->
 
      <% end %>
 
@@ -45,13 +46,21 @@ document.getElementById("log").submit()
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   </form>
 
+ <!-- <form id="log"action="/logout" method="POST">
+   <input name="authenticity_token" value="DqNKIONYpsLkVGsKZ8OYADut0U+O2aaijkMeCep+GF+fLljq//twJ8zsE/uUxNhDKtc1D6B9VYEzmCW334fxCQ==" type="hidden">
+
+ </form> -->
+ <!-- <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+   <input type=submit value='logout'>
+
+<% end %> -->
 
 
 
 <style>
 
 .navbar {
-  overflow: hidden;
+ overflow: hidden;
  background-color: green;
  font-family: Arial;
 }
@@ -127,32 +136,6 @@ document.getElementById("log").submit()
  display: block;
 }
 </style>
-    <%= yield %> -->
-    <nav>
-      <li><a>hello</a></li>
-      <li><a>test</a></li>
-      <li><a>test2</a></li>
-    </nav>
-    <style>
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    a:hoover {
-      opacity: 1;
-    }
-    a {
-      text-decoration: none;
-      opacity: 0.75;
-    }
-    nav {
-      display: flex;
-      list-style: none;
-    }
-    nav li{
-      margin: 0 15px;
-    }
-    </style>
+    <%= yield %>
   </body>
 </html>
