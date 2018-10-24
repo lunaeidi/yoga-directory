@@ -18,36 +18,36 @@
 
 }
 .edit{
-/* margin-top:2px doesnt do anything */
+  /* margin-top:2px doesnt do anything */
   /* position: relative; */
   float: left;
   display: inline;
-/* margin-top: 20px;
-margin-right: 20px; */
+  /* margin-top: 20px;
+  margin-right: 20px; */
 }
 .poseImage{
-/* height can be modified but it doesnt actually move the pic down, just moves the blue box up */
-/*  need to change the pic itself, make it smaller or remove whit spce. */
-/* made it flexbox so it can resize the pic automatically */
- display:flex;
-align-items:center;
-justify-content:center;
-width:20vw;
-height:20vw;
+  /* height can be modified but it doesnt actually move the pic down, just moves the blue box up */
+  /*  need to change the pic itself, make it smaller or remove whit spce. */
+  /* made it flexbox so it can resize the pic automatically */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:20vw;
+  height:20vw;
   border: 3px solid #85CEEB;
   margin: 0 auto;
 
 }
 /* when take out 60vw width from line with border, it actually makes the pic smaller ! */
 .new_img{
-width: 20vw;
+  width: 20vw;
 }
 .category1{
-border: 1px solid blue;
-background: #EEE;
-padding: 5px;
-border-radius: 8px;
-display: inline;
+  border: 1px solid blue;
+  background: #EEE;
+  padding: 5px;
+  border-radius: 8px;
+  display: inline;
 }
 .hi{
   border: 1px solid blue; width: 60vw; background: #C0C0C0;
@@ -69,81 +69,81 @@ display: inline;
 
   <form class="delete" data-id="<%=@pose.id%>" onsubmit="del(); return false" >
     <!-- <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input id="hidden" type="hidden" name="_method" value="delete"> -->
+    <input id="hidden" type="hidden" name="_method" value="delete"> -->
     <input type="submit"value="Delete">
   </form>
   <button class="edit"onclick="edit()" data-id="<%=@pose.id%>">Edit</button>
 
   <script>
   function del(){
-  let DI2= parseInt($(".delete").attr("data-id"))
-  var token = $('meta[name="csrf-token"]').attr('content');
+    let DI2= parseInt($(".delete").attr("data-id"))
+    var token = $('meta[name="csrf-token"]').attr('content');
 
-$.ajax({
-    url: `http://localhost:3000/poses/${DI2}`,
-    type: 'delete',
-    beforeSend: function (xhr) {
+    $.ajax({
+      url: `http://localhost:3000/poses/${DI2}`,
+      type: 'delete',
+      beforeSend: function (xhr) {
         xhr.setRequestHeader('X-CSRF-Token', token)
-    },
-    data: {id:8},
-    contentType: false,
-    processData: false
-});
-}
-//its not working because rails requires authenticity tokens with delete requests.....
-//removing then "then" got rid of the JSON bad parse error though
+      },
+      data: {id:8},
+      contentType: false,
+      processData: false
+    });
+  }
+  //its not working because rails requires authenticity tokens with delete requests.....
+  //removing then "then" got rid of the JSON bad parse error though
   function edit(){
-  let DI= parseInt($(".edit").attr("data-id")) //ID isnt changing
+    let DI= parseInt($(".edit").attr("data-id")) //ID isnt changing
 
-  let url= `/poses/${DI}/edit`
-  // debugger
-window.location.replace(url)
-}
+    let url= `/poses/${DI}/edit`
+    // debugger
+    window.location.replace(url)
+  }
   </script>
-<a href="#" class="js-next" data-id="<%=@pose.id%>"><svg aria-hidden="true" data-prefix="fas" data-icon="arrow-right" class="next svg-inline--fa fa-arrow-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg></a>
-<div class="poseImage">
-  <!-- <%= image_tag(@pose.image.url, width:"20vw")%> -->
-  <img class="img_new" src="<%=@pose.image.url%>">
-</div>
+  <a href="#" class="js-next" data-id="<%=@pose.id%>"><svg aria-hidden="true" data-prefix="fas" data-icon="arrow-right" class="next svg-inline--fa fa-arrow-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg></a>
+  <div class="poseImage">
+    <!-- <%= image_tag(@pose.image.url, width:"20vw")%> -->
+    <img class="img_new" src="<%=@pose.image.url%>">
+  </div>
 
-<!-- , width: '300' -->
-<!--or put edit button here-->
+  <!-- , width: '300' -->
+  <!--or put edit button here-->
 </div>
 <div class="poseNameContainer">
-<h1 class="poseName"><%=@pose.name%></h1>
+  <h1 class="poseName"><%=@pose.name%></h1>
 
-<div class="poseCategories">
-<%@pose.categories.each do |category|%>
-<span class="category1"><%=category.name%></span>
-<%end%> </div>
-</div>
+  <div class="poseCategories">
+    <%@pose.categories.each do |category|%>
+    <span class="category1"><%=category.name%></span>
+    <%end%> </div>
+  </div>
 
-<p class="poseContent"><%=@pose.content%></p>
-<br>
-<button class="loadReviews" data-id="<%=@pose.id%>">Load Reviews</button>
-<ul id="load-review">
-</ul>
-<div style="display: flex;" >
-<ul id="review">
-</ul>
-</div>
-
-
-<%if logged_in?%>
-<h4>Write a review</h4>
-<%=form_for(@review, :html => {:class => "reviewform"}) do |f|%>
-<%=f.text_area :content%>
-<%=f.hidden_field :pose_id, value:@pose.id%>
-<%=f.hidden_field :user_id, value:current_user.id%>
-<%=f.submit%>
-<%end%>
-<br><br>
+  <p class="poseContent"><%=@pose.content%></p>
+  <br>
+  <button class="loadReviews" data-id="<%=@pose.id%>">Load Reviews</button>
+  <ul id="load-review">
+  </ul>
+  <div style="display: flex;" >
+    <ul id="review">
+    </ul>
+  </div>
 
 
+  <%if logged_in?%>
+  <h4>Write a review</h4>
+  <%=form_for(@review, :html => {:class => "reviewform"}) do |f|%>
+  <%=f.text_area :content%>
+  <%=f.hidden_field :pose_id, value:@pose.id%>
+  <%=f.hidden_field :user_id, value:current_user.id%>
+  <%=f.submit%>
+  <%end%>
+  <br><br>
 
 
-<!-- <%if current_user.id == @pose.user_id%>
-<form method="post"action="/poses/<%=@pose.id%>">
+
+
+  <!-- <%if current_user.id == @pose.user_id%>
+  <form method="post"action="/poses/<%=@pose.id%>">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit"value="delete">
@@ -166,13 +166,13 @@ $(function () {
     e.preventDefault()
     let Id= parseInt($(".js-next").attr("data-id"))
     let nextId = parseInt($(".js-next").attr("data-id")) + 1
-        $.getJSON("/poses/" + nextId + ".json", function(data) {
+    $.getJSON("/poses/" + nextId + ".json", function(data) {
 
-        let form_field=  $("#review_pose_id")
-        form_field.val(nextId)
-        $("#load-review").html("")
-        $("#review").html("")
-        $("button").attr("data-id", data["id"])
+      let form_field=  $("#review_pose_id")
+      form_field.val(nextId)
+      $("#load-review").html("")
+      $("#review").html("")
+      $("button").attr("data-id", data["id"])
       $(".poseName").text(data["name"]);
       $(".poseContent").text(data["content"]);
       $(".edit").attr("data-id", data["id"])
@@ -188,34 +188,34 @@ $(function () {
         //could add the same styling class here,/
         //maybe could do .poseCategories.append(<span>...)
       })
-     $(".poseCategories").html(categoryNames) //just addng them to poseCategories here
-// $(".poseCategories").text(categoryNames)
+      $(".poseCategories").html(categoryNames) //just addng them to poseCategories here
+      // $(".poseCategories").text(categoryNames)
       if (data["reviews"].length > 0){
-             let reviews = data["reviews"];
-             let reviewContents = "";
-             //reviews.forEach(function(review) {
-             reviews.forEach((review)=>{
+        let reviews = data["reviews"];
+        let reviewContents = "";
+        //reviews.forEach(function(review) {
+        reviews.forEach((review)=>{
 
-               reviewContents += review["content"]
-             });
+          reviewContents += review["content"]
+        });
 
-           }
-        $(".js-next").attr("data-id", data["id"]);
+      }
+      $(".js-next").attr("data-id", data["id"]);
 
     });
   });
 });
 
 
-  $(function () {
-    $(".loadReviews").on("click", function() {
-      $('#load-review').text("")
-      console.log("A")
-      let poseid = $(this).attr("data-id");
-        $.get(`/poses/${poseid}.json`, function(data) { //this line is causing trouble
-          console.log("B")//doesnt reach
-        let reviews= data["reviews"]
-          //   // sort by name
+$(function () {
+  $(".loadReviews").on("click", function() {
+    $('#load-review').text("")
+    console.log("A")
+    let poseid = $(this).attr("data-id");
+    $.get(`/poses/${poseid}.json`, function(data) { //this line is causing trouble
+      console.log("B")//doesnt reach
+      let reviews= data["reviews"]
+      //   // sort by name
       // let sorted=  reviews.sort(function(a, b) {
       //     var contentA = a["content"].toUpperCase(); // ignore upper and lowercase
       //     var contentB = b["content"].toUpperCase(); // ignore upper and lowercase
@@ -229,11 +229,11 @@ $(function () {
       //     return 0;
       //   });
       if (reviews.length === 0){
-      //  debugger
-    $('#load-review').text("There are no reviews yet.")  }
+        //  debugger
+        $('#load-review').text("There are no reviews yet.")  }
         //reviews.forEach(function(review){
         reviews.forEach((review)=>{
-        //  debugger
+          //  debugger
           console.log("B")
 
           $('#load-review').append('<li class="hi">'+review["username"] + " says " + review["content"]+"</li>")
@@ -248,31 +248,31 @@ $(function () {
   $(function () {
     $('.reviewform').submit(function(event) {
 
-console.log("D")
+      console.log("D")
       event.preventDefault();
       event.stopPropagation()
-        function Review(username, content) {
-          this.username = username;
-          this.content = content;
-        }
-        Review.prototype.postReview = function() {
-            return `${this.username} says ${this.content} `
-        }
+      function Review(username, content) {
+        this.username = username;
+        this.content = content;
+      }
+      Review.prototype.postReview = function() {
+        return `${this.username} says ${this.content} `
+      }
 
-  let id = parseInt($(".js-next").attr("data-id"))
+      let id = parseInt($(".js-next").attr("data-id"))
 
       let posting = $.post('/reviews', $(this).serialize());
-console.log("C")
+      console.log("C")
       posting.done(function(data) {
         $("#review_content").val("")
-       let post = data;
+        let post = data;
 
-// if (document.getElementById('load-review').innerHTML= "There are no reviews yet."){
-//  document.getElementById('load-review').innerHTML= " "
-// }
+        // if (document.getElementById('load-review').innerHTML= "There are no reviews yet."){
+        //  document.getElementById('load-review').innerHTML= " "
+        // }
 
-       let review2 = new Review(post["username"], post["content"]);
-          $("#review").html("<li class='hi'>"+ review2.postReview() + "</li>")
+        let review2 = new Review(post["username"], post["content"]);
+        $("#review").html("<li class='hi'>"+ review2.postReview() + "</li>")
 
 
       });

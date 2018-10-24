@@ -10,27 +10,27 @@ class UsersController < ApplicationController
       flash[:error]= "There's already an account with this email address"
       render :new
     elsif params[:username].empty? #have validation in model... and put the message there and do if user.save
-    flash[:error]= "You must include a username"
-    return  redirect_to controller:'users', action:'new'
-  else #where do I want them to be directed once logged in?
-    @user=  User.create(username: params[:username],email: params[:email], password: params[:password])
-session[:user_id] = @user.id
-redirect_to poses_path
+      flash[:error]= "You must include a username"
+      return  redirect_to controller:'users', action:'new'
+    else #where do I want them to be directed once logged in?
+      @user=  User.create(username: params[:username],email: params[:email], password: params[:password])
+      session[:user_id] = @user.id
+      redirect_to poses_path
+    end
   end
-end
-def show
-  @user= User.find(params[:id])
-  respond_to do |format|
-format.html { render :show }
-format.json { render json: @user}
-end
-end
+  def show
+    @user= User.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @user}
+    end
+  end
 
-def home
-render :layout => false
+  def home
+    render :layout => false
     redirect_to poses_path   if logged_in?
 
     #  @user= User.find(session[:user_id])
 
-end
+  end
 end
