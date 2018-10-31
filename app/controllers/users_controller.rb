@@ -27,8 +27,12 @@ class UsersController < ApplicationController
   end
 
   def home
+    if logged_in?
+    redirect_to poses_path and return
+    end
     render :layout => false
-    redirect_to poses_path   if logged_in?
+    #render poses_path if logged_in?
+
 
     #  @user= User.find(session[:user_id])
 
