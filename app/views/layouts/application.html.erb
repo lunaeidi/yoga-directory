@@ -36,7 +36,6 @@
     <%end%>
  </div>
  <script>
-
  function logout(){
    console.log("A")
 document.getElementById("log").submit()
@@ -48,24 +47,28 @@ document.getElementById("log").submit()
 
  <!-- <form id="log"action="/logout" method="POST">
    <input name="authenticity_token" value="DqNKIONYpsLkVGsKZ8OYADut0U+O2aaijkMeCep+GF+fLljq//twJ8zsE/uUxNhDKtc1D6B9VYEzmCW334fxCQ==" type="hidden">
-
  </form> -->
  <!-- <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
    <input type=submit value='logout'>
-
 <% end %> -->
 
 
-
+<!-- Latest compiled and minified CSS -->
 <style>
 
+body {
+  padding: 0;
+  margin: 0;
+}
+body >* {
+  margin: 3px;
+}
 .navbar {
  overflow: hidden;
  background-color: green;
  font-family: Arial;
  margin: 0;
 }
-
 /* Links inside the navbar */
 .navbar a {
  float: left;
@@ -75,7 +78,6 @@ document.getElementById("log").submit()
  padding: 14px 16px;
  text-decoration: none;
  margin: 0;
-
 }
 .navbar p {
     float: left;
@@ -85,13 +87,11 @@ document.getElementById("log").submit()
    padding: 14px 16px;
    text-decoration: none;
 }
-
 /* The dropdown container */
 .dropdown {
  float: left;
  overflow: hidden;
 }
-
 /* Dropdown button */
 .dropdown .dropbtn {
  font-size: 16px;
@@ -103,12 +103,10 @@ document.getElementById("log").submit()
  font-family: inherit; /* Important for vertical align on mobile phones */
  margin: 0; /* Important for vertical align on mobile phones */
 }
-
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
  background-color: red;
 }
-
 /* Dropdown content (hidden by default) */
 .dropdown-content {
  display: none;
@@ -118,7 +116,6 @@ document.getElementById("log").submit()
  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
  z-index: 1;
 }
-
 /* Links inside the dropdown */
 .dropdown-content a {
  float: none;
@@ -128,12 +125,10 @@ document.getElementById("log").submit()
  display: block;
  text-align: left;
 }
-
 /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
  background-color: #ddd;
 }
-
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
  display: block;

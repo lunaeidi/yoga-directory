@@ -2,10 +2,12 @@
 <%flash.each do |name,value|%>
 <%=value%>
 <%end%>
-<h1>Log In!</h1>
+<div style="display:flex; justify-content:center; align-items:center; flex-direction: column;">
+<h1>Log In</h1>
 <%=form_tag ({controller:'sessions',action:'create',method:'post'}) do%>
 <p>Username:<input type="text"name="username" required></p>
 <p>Password:<input type="password"name="password"required></p>
 <input type="submit"value="Log in">
 
 <%end%>
+</div>
