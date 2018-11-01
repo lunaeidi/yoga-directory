@@ -1,6 +1,8 @@
 <%flash.each do |name,value|%>
 <%=value%>
 <%end%>
+<!-- <header class="jumbotron">
+<div class="container"> -->
 <%if logged_in?%>
 <h2>Hi, you are logged in as <%=@user.username%></h2>
 <br>
@@ -23,18 +25,32 @@ or level:
   <% end %>
 </div>
 <%end%>
+<!-- </div>
+</header> -->
 
 <br>
 <%@poses.each do |pose|%>
-<%= image_tag pose.image.url(:thumb) %>
-<h2><%=link_to pose.name,pose_path(pose)%></h2>
-<h4><%=pose.level.level%></h4>
-<br>
+
+
+           <div class="col-md-4 col-sm-6">
+               <div class="thumbnail">
+                <%= image_tag pose.image.url(:thumb) %>
+                  <div class="caption">
+                      <h2><%=link_to pose.name,pose_path(pose)%></h2>
+                      <h4><%=pose.level.level%></h4>
+                  </div>
+
+               </div>
+           </div>
+
+
+
+<!-- <br> -->
 <%end%>
-<%if logged_in?%>
+<!-- <%if logged_in?%>
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
 
-<% end %>
+<% end %> -->
 
 <%end%>
