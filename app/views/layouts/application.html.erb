@@ -13,7 +13,7 @@
     <div class="navbar">
    <a href="/users/<%=session[:user_id]%>" >My Poses</a>
    <a href="/poses">All Poses</a>
-   <div class="dropdown">
+   <!-- <div class="dropdown">
      <button class="dropbtn">Levels
        <i class="fa fa-caret-down"></i>
      </button>
@@ -22,7 +22,7 @@
        <a href="/levels/2" >Intermediate</a>
        <a href="/levels/3">Advanced</a>
      </div>
-   </div>
+   </div> -->
     <%if logged_in?%>
   <a id="L" onclick="logout()">Logout </a>
       <!-- <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
