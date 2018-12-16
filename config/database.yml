@@ -24,8 +24,12 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
-
+  #database: development.sqlite3
+  database: druh57qkg0889
+  username: uadanchvoqszmw
+  password: 6535f7a485504a326a2d59c06e595a085623869f73b31bd0e6ad5186574f8696
+  host: ec2-75-101-153-56.compute-1.amazonaws.com
+  port: 5432
 
   #DATABASE_URL: postgres://uadanchvoqszmw:6535f7a485504a326a2d59c06e595a085623869f73b31bd0e6ad5186574f8696@ec2-75-101-153-56.compute-1.amazonaws.com:5432/druh57qkg0889
   #database: postgresql-deep-23924

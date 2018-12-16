@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'active_model_serializers'
 gem 'jquery-rails'
-ruby '2.3.8'
+ruby '2.3.1'
 gem 'pry'
 gem 'paperclip'
 gem 'dotenv-rails'
